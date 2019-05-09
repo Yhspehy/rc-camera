@@ -1,0 +1,57 @@
+{
+  "name": "rc-camera",
+  "version": "1.0.0",
+  "description": "Img Slide for react",
+  "keywords": [
+    "react",
+    "rc-camera",
+    "react-component",
+    "img Slide"
+  ],
+  "homepage": "https://github.com/Yhspehy/rc-camera",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:Yhspehy/rc-camera.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Yhspehy/rc-camera/issues"
+  },
+  "license": "MIT",
+  "config": {
+    "port": 8007
+  },
+  "scripts": {
+    "dist": "rc-tools run dist",
+    "build": "rc-tools run build",
+    "compile": "rc-tools run compile --babel-runtime",
+    "gh-pages": "rc-tools run gh-pages",
+    "start": "rc-tools run server",
+    "pub": "rc-tools run pub --babel-runtime",
+    "lint": "rc-tools run lint",
+    "lint:fix": "rc-tools run lint --fix",
+    "karma": "rc-test run karma",
+    "saucelabs": "rc-test run saucelabs",
+    "test": "rc-test run test",
+    "chrome-test": "rc-test run chrome-test",
+    "coverage": "rc-test run coverage",
+    "now-build": "npm run build"
+  },
+  "devDependencies": {
+    "core-js": "^3.0.0",
+    "expect.js": "0.3.x",
+    "pre-commit": "1.x",
+    "rc-test": "^6.0.9",
+    "rc-tools": "^9.5.1",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  },
+  "dependencies": {
+    "babel-runtime": "^6.26.0",
+    "classnames": "^2.2.6",
+    "prop-types": "^15.7.2",
+    "rc-animate": "^2.8.2"
+  },
+  "pre-commit": [
+    "lint"
+  ]
+}
