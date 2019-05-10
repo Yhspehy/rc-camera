@@ -1,0 +1,50 @@
+.@{prefixCls} {
+  font-size: 12px;
+  font-family: 'Arial';
+  padding: 0;
+  position: relative;
+  max-width: 1000px;
+  margin: 0 auto;
+
+  // camera容器
+  &-container {
+    width: 100%;
+  }
+
+
+  // camera target容器
+  &-target {
+    width: 100%;
+    height: 100%;
+    position: relative;
+
+    // 每个图片item
+    &-item {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 1;
+      overflow: hidden;
+
+      &-img {
+        width: 100%;
+      }
+
+      &-content {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        color: #fff;
+        padding: 10px 20px;
+      }
+    }
+
+    // 当前选中的图片
+    &-current {
+      z-index: 99;
+    }
+  }
+}

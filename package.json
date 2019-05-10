@@ -41,17 +41,14 @@
     "expect.js": "0.3.x",
     "pre-commit": "1.x",
     "rc-test": "^6.0.9",
-    "rc-tools": "^9.5.1",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "rc-tools": "^8.x",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0"
   },
   "dependencies": {
     "babel-runtime": "^6.26.0",
     "classnames": "^2.2.6",
     "prop-types": "^15.7.2",
-    "rc-animate": "^2.8.2"
-  },
-  "pre-commit": [
-    "lint"
-  ]
+    "react-motion": "^0.5.2"
+  }
 }
