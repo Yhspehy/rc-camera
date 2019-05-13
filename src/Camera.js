@@ -4,6 +4,8 @@ import PropTypes from "prop-types";
 import TargetContainer from "./TargetContainer";
 import ButtonContainer from "./ButtonContainer";
 
+import { animateTypeList } from "./utils/config";
+
 class Camera extends React.Component {
   static propTypes = {
     width: PropTypes.string,
@@ -22,21 +24,21 @@ class Camera extends React.Component {
     imgList: [],
     current: 0,
     slideOn: "next",
-    animateType: "scrollTop"
+    animateType: "random"
   };
 
   constructor(props) {
     super(props);
 
     let current = props.current;
-    if ("index" in props) {
-      current = props.current;
-    }
 
     if (current + 1 > props.imgList.length) {
       // console.warn("current大于imgList长度，将默认显示第一张图片");
       current = 0;
     }
+
+    const animateType =
+      props.animateType === "random" ? "scrollTop" : props.animateType;
 
     this.cameraRef = React.createRef();
 
@@ -45,7 +47,8 @@ class Camera extends React.Component {
       nextIndex: 0,
       isAnimate: false,
       height: 0,
-      isHover: false
+      isHover: false,
+      animateType
     };
   }
 
@@ -57,6 +60,17 @@ class Camera extends React.Component {
     this.setState({
       height: this.cameraRef.current.clientWidth * this.props.aspectRadio
     });
+  };
+
+  getAnimateType = () => {
+    if (this.props.animateType === "random") {
+      const length = animateTypeList.length;
+      const randomIndex = Math.floor(Math.random() * length);
+      const animateType = animateTypeList[randomIndex];
+      this.setState({
+        animateType
+      });
+    }
   };
 
   mouseEnter = () => {
@@ -71,17 +85,20 @@ class Camera extends React.Component {
     });
   };
 
+  // 按钮点击事件
   handleClick = next => {
     const { isAnimate } = this.state;
     if (isAnimate) {
       return;
     }
+    this.getAnimateType();
     this.setState({
       nextIndex: next,
       isAnimate: true
     });
   };
 
+  // 是否执行动画
   handleAnimate = (c, a) => {
     this.setState({
       current: c,
@@ -90,8 +107,15 @@ class Camera extends React.Component {
   };
 
   render() {
-    const { imgList, prefixCls, width, slideOn, animateType } = this.props;
-    const { current, height, isHover, nextIndex, isAnimate } = this.state;
+    const { imgList, prefixCls, width, slideOn } = this.props;
+    const {
+      current,
+      height,
+      isHover,
+      nextIndex,
+      isAnimate,
+      animateType
+    } = this.state;
 
     return (
       <div className={prefixCls}>
@@ -111,6 +135,7 @@ class Camera extends React.Component {
               {height > 0 ? (
                 <TargetContainer
                   prefixCls={prefixCls}
+                  width={this.cameraRef.current.clientWidth}
                   height={height}
                   imgList={imgList}
                   current={current}

@@ -1,12 +1,13 @@
 import React from "react";
-
 import PropTypes from "prop-types";
 
 import { Motion, spring } from "react-motion";
+import { getScrollStyle } from "./utils/animate";
 
 export default class TargetContainre extends React.PureComponent {
   static propTypes = {
     prefixCls: PropTypes.string,
+    width: PropTypes.number,
     height: PropTypes.number,
     imgList: PropTypes.arrayOf(PropTypes.object),
     current: PropTypes.number,
@@ -29,6 +30,7 @@ export default class TargetContainre extends React.PureComponent {
   render() {
     const {
       prefixCls,
+      width,
       height,
       imgList,
       current,
@@ -43,7 +45,7 @@ export default class TargetContainre extends React.PureComponent {
 
     let animateContainer = null;
 
-    let animateDiv = (
+    const defaultImg = (
       <img className={`${prefixCls}-target-item-img`} src={el.img} alt="" />
     );
 
@@ -53,36 +55,43 @@ export default class TargetContainre extends React.PureComponent {
         handleAnimate(nextIndex, false);
       }, 1000);
 
-      animateDiv = (
-        <img className={`${prefixCls}-target-item-img`} src={el.img} alt="" />
-      );
-
       if (slideOn === "next") {
-        if (animateType === "scrollTop") {
+        if (
+          animateType === "scrollTop" ||
+          animateType === "scrollRight" ||
+          animateType === "scrollBottom" ||
+          animateType === "scrollLeft"
+        ) {
+          const scrollStyle = getScrollStyle(animateType, width, height);
+          const type = animateType.match(/scroll(.*)$/)[1].toLocaleLowerCase();
+          const posType = type === "top" || type === "bottom" ? "top" : "left";
           animateContainer = (
             <div className={`${prefixCls}-target-item-img-container`}>
               {/* prev img */}
               <Motion
-                defaultStyle={{ top: 0 }}
-                style={{ top: spring(-height) }}
+                defaultStyle={{ [posType]: scrollStyle.prev.start }}
+                style={{ [posType]: spring(scrollStyle.prev.final) }}
               >
-                {({ top }) => (
+                {pos => (
                   <img
                     className={`${prefixCls}-target-item-img`}
                     src={imgList[current].img}
-                    style={{ top }}
+                    style={pos}
                     alt="prev img"
                   />
                 )}
               </Motion>
 
               {/* next img */}
-              <Motion defaultStyle={{ top: height }} style={{ top: spring(0) }}>
-                {({ top }) => (
+              <Motion
+                defaultStyle={{ [posType]: scrollStyle.next.start }}
+                style={{ [posType]: spring(scrollStyle.next.final) }}
+              >
+                {pos => (
                   <img
                     className={`${prefixCls}-target-item-img`}
                     src={imgList[nextIndex].img}
-                    style={{ top }}
+                    style={pos}
                     alt="next img"
                   />
                 )}
@@ -96,7 +105,7 @@ export default class TargetContainre extends React.PureComponent {
     return (
       <div className={`${prefixCls}-target-item`}>
         {/* 图片 */}
-        {animateDiv}
+        {defaultImg}
         {animateContainer}
 
         {/* 图片底部内容 */}
