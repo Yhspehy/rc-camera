@@ -50,5 +50,8 @@
     "classnames": "^2.2.6",
     "prop-types": "^15.7.2",
     "react-motion": "^0.5.2"
-  }
+  },
+  "pre-commit": [
+    "lint"
+  ]
 }

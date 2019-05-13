@@ -1,7 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import classNames from "classnames";
-import { Motion, spring } from "react-motion";
 
 import TargetContainer from "./TargetContainer";
 import ButtonContainer from "./ButtonContainer";
@@ -12,7 +10,9 @@ class Camera extends React.Component {
     aspectRadio: PropTypes.number,
     prefixCls: PropTypes.string,
     imgList: PropTypes.arrayOf(PropTypes.object),
-    current: PropTypes.number
+    current: PropTypes.number,
+    slideOn: PropTypes.string,
+    animateType: PropTypes.string
   };
 
   static defaultProps = {
@@ -20,7 +20,9 @@ class Camera extends React.Component {
     aspectRadio: 0.5,
     prefixCls: "rc-camera",
     imgList: [],
-    current: 0
+    current: 0,
+    slideOn: "next",
+    animateType: "scrollTop"
   };
 
   constructor(props) {
@@ -32,7 +34,7 @@ class Camera extends React.Component {
     }
 
     if (current + 1 > props.imgList.length) {
-      console.warn("current大于imgList长度，将默认显示第一张图片");
+      // console.warn("current大于imgList长度，将默认显示第一张图片");
       current = 0;
     }
 
@@ -48,18 +50,22 @@ class Camera extends React.Component {
   }
 
   componentDidMount() {
+    this.getHeight();
+  }
+
+  getHeight = () => {
     this.setState({
       height: this.cameraRef.current.clientWidth * this.props.aspectRadio
     });
-  }
+  };
 
-  mouseEnter = e => {
+  mouseEnter = () => {
     this.setState({
       isHover: true
     });
   };
 
-  mouseLeave = e => {
+  mouseLeave = () => {
     this.setState({
       isHover: false
     });
@@ -84,7 +90,7 @@ class Camera extends React.Component {
   };
 
   render() {
-    const { imgList, prefixCls, width } = this.props;
+    const { imgList, prefixCls, width, slideOn, animateType } = this.props;
     const { current, height, isHover, nextIndex, isAnimate } = this.state;
 
     return (
@@ -105,39 +111,28 @@ class Camera extends React.Component {
               {height > 0 ? (
                 <TargetContainer
                   prefixCls={prefixCls}
+                  height={height}
                   imgList={imgList}
                   current={current}
                   nextIndex={nextIndex}
                   isAnimate={isAnimate}
                   handleAnimate={this.handleAnimate}
+                  slideOn={slideOn}
+                  animateType={animateType}
                 />
               ) : (
                 <div> 初始化中....</div>
               )}
             </div>
 
-            <Motion style={{ opacity: spring(isHover ? 1 : 0) }}>
-              {({ opacity }) => (
-                <div className={`${prefixCls}-button-wrap`}>
-                  {opacity ? (
-                    <ButtonContainer
-                      prefixCls={prefixCls}
-                      imgCount={imgList.length}
-                      current={current}
-                      handleClick={this.handleClick}
-                      style={{ opacity }}
-                    />
-                  ) : null}
-                </div>
-              )}
-            </Motion>
+            <ButtonContainer
+              prefixCls={prefixCls}
+              imgCount={imgList.length}
+              current={current}
+              handleClick={this.handleClick}
+              isHover={isHover}
+            />
           </div>
-          {/* <ButtonContainer
-            prefixCls={prefixCls}
-            imgCount={imgList.length}
-            current={current}
-            handleClick={this.handleClick}
-          /> */}
         </div>
       </div>
     );

@@ -1,6 +1,16 @@
 import React from "react";
+import PropTypes from "prop-types";
+import classNames from "classnames";
 
 export default class ButtonContainer extends React.PureComponent {
+  static propTypes = {
+    prefixCls: PropTypes.string,
+    imgCount: PropTypes.number,
+    current: PropTypes.number,
+    handleClick: PropTypes.func,
+    isHover: PropTypes.bool
+  };
+
   click = type => {
     const { imgCount, current, handleClick } = this.props;
     let i = 0;
@@ -13,9 +23,14 @@ export default class ButtonContainer extends React.PureComponent {
   };
 
   render() {
-    const { prefixCls, current, style } = this.props;
+    const { prefixCls, isHover } = this.props;
     return (
-      <div className={`${prefixCls}-button-container`} style={style}>
+      <div
+        className={classNames(`${prefixCls}-button-container`, {
+          [`${prefixCls}-hidden`]: !isHover,
+          [`${prefixCls}-show`]: isHover
+        })}
+      >
         <button
           className={`${prefixCls}-button`}
           onClick={() => this.click("prev")}
