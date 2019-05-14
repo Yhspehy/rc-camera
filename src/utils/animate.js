@@ -51,11 +51,42 @@ export function getAnimateFormat(type) {
   let reverse = false;
 
   switch (type) {
+    case "curtainTopLeft":
+      rows = 1;
+      cols = 12;
+      reverse = false;
+      break;
+
+    case "curtainTopRight":
+      rows = 1;
+      cols = 12;
+      reverse = true;
+      break;
+
+    case "curtainBottomLeft":
+      rows = 1;
+      cols = 12;
+      reverse = false;
+      break;
+
+    case "curtainBottomRight":
+      rows = 1;
+      cols = 12;
+      reverse = true;
+      break;
+
     case "curtainSliceLeft":
       rows = 1;
       cols = 12;
       reverse = false;
       break;
+
+    case "curtainSliceRight":
+      rows = 1;
+      cols = 12;
+      reverse = true;
+      break;
+
     default:
   }
 
@@ -64,4 +95,45 @@ export function getAnimateFormat(type) {
     cols,
     reverse
   };
+}
+
+export function getTransitionStyles(type, index, width, height) {
+  const style = {
+    entering: null,
+    entered: null
+  };
+
+  switch (type) {
+    case "curtainTopLeft":
+      style.entering = { marginTop: -height };
+      style.entered = { marginTop: 0 };
+      break;
+
+    case "curtainTopRight":
+      style.entering = { marginTop: -height };
+      style.entered = { marginTop: 0 };
+      break;
+    case "curtainBottomLeft":
+      style.entering = { marginTop: height };
+      style.entered = { marginTop: 0 };
+      break;
+
+    case "curtainBottomRight":
+      style.entering = { marginTop: height };
+      style.entered = { marginTop: 0 };
+      break;
+    case "curtainSliceLeft":
+      style.entering = { marginTop: index % 2 === 0 ? -height : height };
+      style.entered = { marginTop: 0 };
+      break;
+
+    case "curtainSliceRight":
+      style.entering = { marginTop: index % 2 === 0 ? -height : height };
+      style.entered = { marginTop: 0 };
+      break;
+
+    default:
+  }
+
+  return style;
 }

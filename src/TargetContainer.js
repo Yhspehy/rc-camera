@@ -2,7 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import { Transition, TransitionGroup } from "react-transition-group";
-import getScrollStyle, { getAnimateFormat } from "./utils/animate";
+import getScrollStyle, {
+  getAnimateFormat,
+  getTransitionStyles
+} from "./utils/animate";
 
 export default class TargetContainre extends React.PureComponent {
   static propTypes = {
@@ -15,7 +18,9 @@ export default class TargetContainre extends React.PureComponent {
     isAnimate: PropTypes.bool,
     handleAnimate: PropTypes.func,
     slideOn: PropTypes.string,
-    animateType: PropTypes.string
+    animateType: PropTypes.string,
+    duration: PropTypes.number,
+    easing: PropTypes.string
   };
 
   // shouldComponentUpdate(nextProps) {
@@ -27,10 +32,10 @@ export default class TargetContainre extends React.PureComponent {
   //   return false;
   // }
 
-  animateOver = () => {
+  animateOver = (delay = 0) => {
     setTimeout(() => {
       this.props.handleAnimate(this.props.nextIndex, false);
-    }, 1200);
+    }, this.props.duration + delay);
   };
 
   /**
@@ -44,7 +49,9 @@ export default class TargetContainre extends React.PureComponent {
       imgList,
       current,
       nextIndex,
-      animateType
+      animateType,
+      duration,
+      easing
     } = this.props;
 
     const scrollStyle = getScrollStyle(animateType, width, height);
@@ -75,7 +82,7 @@ export default class TargetContainre extends React.PureComponent {
                 ...{
                   width,
                   height,
-                  transition: `all 1s ease-in-out`
+                  transition: `all  ${duration}ms ${easing}`
                 }
               }}
               alt="prev img"
@@ -93,7 +100,7 @@ export default class TargetContainre extends React.PureComponent {
                 ...{
                   width,
                   height,
-                  transition: `all 1s ease-in-out`
+                  transition: `all  ${duration}ms ${easing}`
                 }
               }}
               alt="prev img"
@@ -109,13 +116,16 @@ export default class TargetContainre extends React.PureComponent {
    */
   renderAnimateNode = () => {
     const {
+      prefixCls,
       width,
       height,
       imgList,
       current,
       nextIndex,
       slideOn,
-      animateType
+      animateType,
+      duration,
+      easing
     } = this.props;
 
     const imgBg =
@@ -154,14 +164,11 @@ export default class TargetContainre extends React.PureComponent {
         cols,
         reverse,
         reverseIndex: 0,
-        width: Math.floor(width / cols) + addLeft + 1,
-        height: Math.floor(height / rows) + addTop + 1,
+        width: Math.floor(width / cols) + addLeft,
+        height: Math.floor(height / rows) + addTop,
         top: topWidth,
         left: leftWidth,
-        transitionStyles: {
-          entering: { marginTop: i % 2 === 0 ? -height : height },
-          entered: { marginTop: 0 }
-        }
+        transitionStyles: getTransitionStyles(animateType, i, width, height)
       });
 
       leftWidth += Math.floor(width / cols) + addLeft;
@@ -170,12 +177,22 @@ export default class TargetContainre extends React.PureComponent {
       }
     }
 
-    this.animateOver();
+    if (blocks[0].reverse) {
+      blocks.reverse();
+    }
+
+    this.animateOver(blockNum * 100);
 
     return (
-      <TransitionGroup>
+      <TransitionGroup className={`${prefixCls}-target-item-img-container`}>
         {blocks.map((el, idx) => (
-          <Transition key={idx} appear in timeout={0}>
+          <Transition
+            key={idx}
+            appear
+            in
+            timeout={idx * 100}
+            onEntered={console.log(111)}
+          >
             {state => (
               <div
                 style={{
@@ -186,7 +203,7 @@ export default class TargetContainre extends React.PureComponent {
                     width: el.width,
                     height: el.height,
                     zIndex: 1001,
-                    transition: `all 1s ease-in-out`,
+                    transition: `all ${duration}ms ${easing}`,
                     background: `${-el.left}px ${-el.top}px / ${width}px ${height}px  no-repeat url(${imgBg})`
                   },
                   ...el.transitionStyles[state]
@@ -250,9 +267,9 @@ export default class TargetContainre extends React.PureComponent {
         {animateContainer}
 
         {/* 图片底部内容 */}
-        <div className={`${prefixCls}-target-item-content`}>
+        {/* <div className={`${prefixCls}-target-item-content`}>
           {imgList[current].content}
-        </div>
+        </div> */}
       </div>
     );
   }

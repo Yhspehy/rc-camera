@@ -14,7 +14,9 @@ class Camera extends React.Component {
     imgList: PropTypes.arrayOf(PropTypes.object),
     current: PropTypes.number,
     slideOn: PropTypes.string,
-    animateType: PropTypes.string
+    animateType: PropTypes.string,
+    duration: PropTypes.number,
+    easing: PropTypes.string
   };
 
   static defaultProps = {
@@ -24,7 +26,9 @@ class Camera extends React.Component {
     imgList: [],
     current: 0,
     slideOn: "next",
-    animateType: "scrollTop"
+    animateType: "curtainBottomLeft",
+    duration: 1000,
+    easing: "cubic-bezier(0.77, 0, 0.175, 1)"
   };
 
   constructor(props) {
@@ -107,7 +111,7 @@ class Camera extends React.Component {
   };
 
   render() {
-    const { imgList, prefixCls, width, slideOn } = this.props;
+    const { imgList, prefixCls, width, slideOn, duration, easing } = this.props;
     const {
       current,
       height,
@@ -144,6 +148,8 @@ class Camera extends React.Component {
                   handleAnimate={this.handleAnimate}
                   slideOn={slideOn}
                   animateType={animateType}
+                  duration={duration}
+                  easing={easing}
                 />
               ) : (
                 <div> 初始化中....</div>
