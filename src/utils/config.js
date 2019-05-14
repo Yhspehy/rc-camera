@@ -2,7 +2,8 @@ const animateTypeList = [
   "scrollTop",
   "scrollLeft",
   "scrollBottom",
-  "scrollRight"
+  "scrollRight",
+  "curtainSliceLeft"
 ];
 
 export default animateTypeList;

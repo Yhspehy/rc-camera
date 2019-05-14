@@ -44,3 +44,24 @@ export default function getScrollStyle(type, width, height) {
 
   return style;
 }
+
+export function getAnimateFormat(type) {
+  let rows = 1;
+  let cols = 12;
+  let reverse = false;
+
+  switch (type) {
+    case "curtainSliceLeft":
+      rows = 1;
+      cols = 12;
+      reverse = false;
+      break;
+    default:
+  }
+
+  return {
+    rows,
+    cols,
+    reverse
+  };
+}

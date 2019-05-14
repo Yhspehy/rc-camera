@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import TargetContainer from "./TargetContainer";
 import ButtonContainer from "./ButtonContainer";
 
-import { animateTypeList } from "./utils/config";
+import animateTypeList from "./utils/config";
 
 class Camera extends React.Component {
   static propTypes = {
@@ -24,7 +24,7 @@ class Camera extends React.Component {
     imgList: [],
     current: 0,
     slideOn: "next",
-    animateType: "random"
+    animateType: "scrollTop"
   };
 
   constructor(props) {
@@ -98,7 +98,7 @@ class Camera extends React.Component {
     });
   };
 
-  // 是否执行动画
+  // 动画执行完毕
   handleAnimate = (c, a) => {
     this.setState({
       current: c,
