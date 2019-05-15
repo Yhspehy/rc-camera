@@ -147,6 +147,8 @@ export default class TargetContainre extends React.PureComponent {
     let leftWidth = 0;
     let shuffleArr = Array(blockNum).fill(0);
     let finalEasing = easing;
+    // 过渡style计算函数
+    const { delay, transitonStyleFn } = getTransitionStyles(animateType);
 
     if (animateType === "stampede") {
       shuffleArr = shuffle([...Array(blockNum).keys()]);
@@ -167,17 +169,28 @@ export default class TargetContainre extends React.PureComponent {
         addTop = 0;
       }
 
-      blocks.push({
+      const elWidth = Math.floor(width / cols) + addLeft;
+      const elHeight = Math.floor(height / rows) + addTop;
+
+      const baseElObj = {
+        containerWidth: width,
+        containerHeight: height,
         index: i,
         rows,
         cols,
         reverse,
         reverseIndex: shuffleArr[i],
-        width: Math.floor(width / cols) + addLeft,
-        height: Math.floor(height / rows) + addTop,
+        width: elWidth,
+        height: elHeight,
         top: topWidth,
-        left: leftWidth,
-        transitionStyles: getTransitionStyles(animateType, i, width, height)
+        left: leftWidth
+      };
+
+      blocks.push({
+        ...baseElObj,
+        ...{
+          transitionStyles: transitonStyleFn(baseElObj)
+        }
       });
 
       leftWidth += Math.floor(width / cols) + addLeft;
@@ -211,18 +224,12 @@ export default class TargetContainre extends React.PureComponent {
       blocks.reverse();
     }
 
-    this.animateOver(blockNum * 100);
+    this.animateOver(blockNum * delay);
 
     return (
       <TransitionGroup className={`${prefixCls}-target-item-img-container`}>
         {blocks.map((el, idx) => (
-          <Transition
-            key={idx}
-            appear
-            in
-            timeout={0}
-            onEntered={console.log(111)}
-          >
+          <Transition key={idx} appear in timeout={delay * idx}>
             {state => (
               <div
                 style={{

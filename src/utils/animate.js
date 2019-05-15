@@ -1,48 +1,49 @@
 export default function getScrollStyle(type, width, height) {
-  const style = {
-    prev: {
-      start: 0,
-      final: 0
-    },
-    next: {
-      start: 0,
-      final: 0
-    }
+  const prev = {
+    start: 0,
+    final: 0
+  };
+  const next = {
+    start: 0,
+    final: 0
   };
 
   switch (type) {
     case "scrollTop":
-      style.prev.start = 0;
-      style.prev.final = -height;
-      style.next.start = height;
-      style.next.final = 0;
+      prev.start = 0;
+      prev.final = -height;
+      next.start = height;
+      next.final = 0;
       break;
 
     case "scrollRight":
-      style.prev.start = 0;
-      style.prev.final = width;
-      style.next.start = -width;
-      style.next.final = 0;
+      prev.start = 0;
+      prev.final = width;
+      next.start = -width;
+      next.final = 0;
       break;
 
     case "scrollBottom":
-      style.prev.start = 0;
-      style.prev.final = height;
-      style.next.start = -height;
-      style.next.final = 0;
+      prev.start = 0;
+      prev.final = height;
+      next.start = -height;
+      next.final = 0;
       break;
 
     case "scrollLeft":
-      style.prev.start = 0;
-      style.prev.final = -width;
-      style.next.start = width;
-      style.next.final = 0;
+      prev.start = 0;
+      prev.final = -width;
+      next.start = width;
+      next.final = 0;
       break;
 
     default:
   }
 
-  return style;
+  return {
+    prev,
+    next
+  };
 }
 
 export function getAnimateFormat(type) {
@@ -129,6 +130,12 @@ export function getAnimateFormat(type) {
       reverse = false;
       break;
 
+    case "mosaic":
+      rows = 4;
+      cols = 6;
+      reverse = false;
+      break;
+
     default:
   }
 
@@ -139,76 +146,149 @@ export function getAnimateFormat(type) {
   };
 }
 
-export function getTransitionStyles(type, index, width, height) {
-  const style = {
-    entering: null,
-    entered: null
-  };
+export function getTransitionStyles(type) {
+  let fn = null;
+  let delay = 100;
 
   switch (type) {
     case "curtainTopLeft":
-      style.entering = { marginTop: -height };
-      style.entered = { marginTop: 0 };
+      fn = function style(el) {
+        return {
+          entering: { marginTop: -el.containerHeight },
+          entered: { marginTop: 0 }
+        };
+      };
       break;
 
     case "curtainTopRight":
-      style.entering = { marginTop: -height };
-      style.entered = { marginTop: 0 };
+      fn = function style(el) {
+        return {
+          entering: { marginTop: -el.containerHeight },
+          entered: { marginTop: 0 }
+        };
+      };
       break;
     case "curtainBottomLeft":
-      style.entering = { marginTop: height };
-      style.entered = { marginTop: 0 };
+      fn = function style(el) {
+        return {
+          entering: { marginTop: el.containerHeight },
+          entered: { marginTop: 0 }
+        };
+      };
       break;
 
     case "curtainBottomRight":
-      style.entering = { marginTop: height };
-      style.entered = { marginTop: 0 };
+      fn = function style(el) {
+        return {
+          entering: { marginTop: el.containerHeight },
+          entered: { marginTop: 0 }
+        };
+      };
       break;
     case "curtainSliceLeft":
-      style.entering = { marginTop: index % 2 === 0 ? -height : height };
-      style.entered = { marginTop: 0 };
+      fn = function style(el) {
+        return {
+          entering: {
+            marginTop:
+              el.index % 2 === 0 ? -el.containerHeight : el.containerHeight
+          },
+          entered: { margintop: 0 }
+        };
+      };
       break;
 
     case "curtainSliceRight":
-      style.entering = { marginTop: index % 2 === 0 ? -height : height };
-      style.entered = { marginTop: 0 };
+      fn = function style(el) {
+        return {
+          entering: {
+            marginTop:
+              el.index % 2 === 0 ? -el.containerHeight : el.containerHeight
+          },
+          entered: { margintop: 0 }
+        };
+      };
       break;
 
     case "blindCurtainTopLeft":
-      style.entering = { marginLeft: -width };
-      style.entered = { marginLeft: 0 };
+      fn = function style(el) {
+        return {
+          entering: { marginLeft: -el.containerWidth },
+          entered: { marginLeft: 0 }
+        };
+      };
       break;
 
     case "blindCurtainBottomLeft":
-      style.entering = { marginLeft: -width };
-      style.entered = { marginLeft: 0 };
+      fn = function style(el) {
+        return {
+          entering: { marginLeft: -el.containerWidth },
+          entered: { marginLeft: 0 }
+        };
+      };
       break;
 
     case "blindCurtainTopRight":
-      style.entering = { marginLeft: width };
-      style.entered = { marginLeft: 0 };
+      fn = function style(el) {
+        return {
+          entering: { marginLeft: el.containerWidth },
+          entered: { marginLeft: 0 }
+        };
+      };
       break;
 
     case "blindCurtainBottomRight":
-      style.entering = { marginLeft: width };
-      style.entered = { marginLeft: 0 };
+      fn = function style(el) {
+        return {
+          entering: { marginLeft: el.containerWidth },
+          entered: { marginLeft: 0 }
+        };
+      };
       break;
 
     case "blindCurtainSliceTop":
-      style.entering = { marginLeft: index % 2 === 0 ? -width : width };
-      style.entered = { marginLeft: 0 };
+      fn = function style(el) {
+        return {
+          entering: {
+            marginLeft:
+              el.index % 2 === 0 ? -el.containerWidth : el.containerWidth
+          },
+          entered: { marginLeft: 0 }
+        };
+      };
       break;
 
     case "blindCurtainSliceBottom":
-      style.entering = { marginLeft: index % 2 === 0 ? -width : width };
-      style.entered = { marginLeft: 0 };
+      fn = function style(el) {
+        return {
+          entering: {
+            marginLeft:
+              el.index % 2 === 0 ? -el.containerWidth : el.containerWidth
+          },
+          entered: { marginLeft: 0 }
+        };
+      };
       break;
 
     case "stampede":
+      delay = 0;
+      break;
+
+    case "mosaic":
+      delay = 50;
+      fn = function style(el) {
+        return {
+          entering: { width: 0, height: 0 },
+          entered: { width: el.width, height: el.height }
+        };
+      };
+
       break;
 
     default:
   }
 
-  return style;
+  return {
+    delay,
+    transitonStyleFn: fn
+  };
 }
