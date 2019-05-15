@@ -8,7 +8,14 @@ const animateTypeList = [
   "curtainBottomLeft",
   "curtainBottomRight",
   "curtainSliceLeft",
-  "curtainSliceRight"
+  "curtainSliceRight",
+  "blindCurtainTopLeft",
+  "blindCurtainTopRight",
+  "blindCurtainBottomLeft",
+  "blindCurtainBottomRight",
+  "blindCurtainSliceTop",
+  "blindCurtainSliceBottom",
+  "stampedew"
 ];
 
 export default animateTypeList;

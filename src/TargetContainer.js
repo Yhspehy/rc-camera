@@ -2,10 +2,13 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import { Transition, TransitionGroup } from "react-transition-group";
+
 import getScrollStyle, {
   getAnimateFormat,
   getTransitionStyles
 } from "./utils/animate";
+
+import shuffle from "./utils/shuffle";
 
 export default class TargetContainre extends React.PureComponent {
   static propTypes = {
@@ -142,6 +145,12 @@ export default class TargetContainre extends React.PureComponent {
     let addTop = 0;
     let topWidth = 0;
     let leftWidth = 0;
+    let shuffleArr = Array(blockNum).fill(0);
+    let finalEasing = easing;
+
+    if (animateType === "stampede") {
+      shuffleArr = shuffle([...Array(blockNum).keys()]);
+    }
 
     for (let i = 0; i < blockNum; i++) {
       if (i % cols < leftScrap) {
@@ -163,7 +172,7 @@ export default class TargetContainre extends React.PureComponent {
         rows,
         cols,
         reverse,
-        reverseIndex: 0,
+        reverseIndex: shuffleArr[i],
         width: Math.floor(width / cols) + addLeft,
         height: Math.floor(height / rows) + addTop,
         top: topWidth,
@@ -175,6 +184,27 @@ export default class TargetContainre extends React.PureComponent {
       if (i % cols === cols - 1) {
         topWidth += Math.floor(height / rows) + addTop;
       }
+    }
+
+    if (animateType === "stampede") {
+      blocks.forEach(el => {
+        el.transitionStyles = {
+          entering: {
+            width: 0,
+            height: 0,
+            marginTop: blocks[el.reverseIndex].top - el.top,
+            marginLeft: blocks[el.reverseIndex].left - el.left
+          },
+          entered: {
+            width: el.width,
+            height: el.height,
+            marginTop: 0,
+            marginLeft: 0
+          }
+        };
+      });
+
+      finalEasing = "ease-in-out";
     }
 
     if (blocks[0].reverse) {
@@ -190,7 +220,7 @@ export default class TargetContainre extends React.PureComponent {
             key={idx}
             appear
             in
-            timeout={idx * 100}
+            timeout={0}
             onEntered={console.log(111)}
           >
             {state => (
@@ -203,7 +233,7 @@ export default class TargetContainre extends React.PureComponent {
                     width: el.width,
                     height: el.height,
                     zIndex: 1001,
-                    transition: `all ${duration}ms ${easing}`,
+                    transition: `all ${duration}ms ${finalEasing}`,
                     background: `${-el.left}px ${-el.top}px / ${width}px ${height}px  no-repeat url(${imgBg})`
                   },
                   ...el.transitionStyles[state]
