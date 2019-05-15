@@ -1,3 +1,7 @@
+/**
+ * Copy from Lodash/shuffle(https://github.com/lodash/lodash/blob/master/shuffle.js)
+ */
+
 function shuffle(array) {
   const length = array == null ? 0 : array.length;
   if (!length) {

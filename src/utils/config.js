@@ -15,7 +15,13 @@ const animateTypeList = [
   "blindCurtainBottomRight",
   "blindCurtainSliceTop",
   "blindCurtainSliceBottom",
-  "stampedew"
+  "stampede",
+  "mosaic",
+  "mosaicReverse",
+  "mosaicRandom",
+  "mosaicSpiral",
+  "mosaicSpiralReverse",
+  "topLeftBottomRight"
 ];
 
 export default animateTypeList;

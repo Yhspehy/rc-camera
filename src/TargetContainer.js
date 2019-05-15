@@ -5,10 +5,9 @@ import { Transition, TransitionGroup } from "react-transition-group";
 
 import getScrollStyle, {
   getAnimateFormat,
-  getTransitionStyles
+  getTransitionStyles,
+  specialAnimate
 } from "./utils/animate";
-
-import shuffle from "./utils/shuffle";
 
 export default class TargetContainre extends React.PureComponent {
   static propTypes = {
@@ -133,9 +132,9 @@ export default class TargetContainre extends React.PureComponent {
 
     const imgBg =
       slideOn === "next" ? imgList[nextIndex].img : imgList[current].img;
-    const { rows, cols, reverse } = getAnimateFormat(animateType);
+    const { rows, cols, reverse, special } = getAnimateFormat(animateType);
     const blockNum = rows * cols;
-    const blocks = [];
+    let blocks = [];
 
     // 计算取整中少计入的宽度
     const leftScrap = width - Math.floor(width / cols) * cols;
@@ -145,14 +144,11 @@ export default class TargetContainre extends React.PureComponent {
     let addTop = 0;
     let topWidth = 0;
     let leftWidth = 0;
-    let shuffleArr = Array(blockNum).fill(0);
     let finalEasing = easing;
     // 过渡style计算函数
     const { delay, transitonStyleFn } = getTransitionStyles(animateType);
 
-    if (animateType === "stampede") {
-      shuffleArr = shuffle([...Array(blockNum).keys()]);
-    }
+    console.log(animateType);
 
     for (let i = 0; i < blockNum; i++) {
       if (i % cols < leftScrap) {
@@ -179,7 +175,6 @@ export default class TargetContainre extends React.PureComponent {
         rows,
         cols,
         reverse,
-        reverseIndex: shuffleArr[i],
         width: elWidth,
         height: elHeight,
         top: topWidth,
@@ -189,7 +184,7 @@ export default class TargetContainre extends React.PureComponent {
       blocks.push({
         ...baseElObj,
         ...{
-          transitionStyles: transitonStyleFn(baseElObj)
+          transitionStyles: transitonStyleFn && transitonStyleFn(baseElObj)
         }
       });
 
@@ -199,37 +194,24 @@ export default class TargetContainre extends React.PureComponent {
       }
     }
 
-    if (animateType === "stampede") {
-      blocks.forEach(el => {
-        el.transitionStyles = {
-          entering: {
-            width: 0,
-            height: 0,
-            marginTop: blocks[el.reverseIndex].top - el.top,
-            marginLeft: blocks[el.reverseIndex].left - el.left
-          },
-          entered: {
-            width: el.width,
-            height: el.height,
-            marginTop: 0,
-            marginLeft: 0
-          }
-        };
-      });
-
-      finalEasing = "ease-in-out";
+    if (special) {
+      const specialObj = specialAnimate(animateType, blocks);
+      blocks = specialObj.blocks;
+      finalEasing = specialObj.easing;
     }
 
-    if (blocks[0].reverse) {
-      blocks.reverse();
-    }
+    // 反转数组
+    // if (blocks[0].reverse) {
+    //   blocks.reverse();
+    // }
 
+    // 触发动画结束事件
     this.animateOver(blockNum * delay);
 
     return (
       <TransitionGroup className={`${prefixCls}-target-item-img-container`}>
         {blocks.map((el, idx) => (
-          <Transition key={idx} appear in timeout={delay * idx}>
+          <Transition key={idx} appear in timeout={el.transitionStyles.delay}>
             {state => (
               <div
                 style={{
