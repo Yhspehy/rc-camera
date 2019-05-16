@@ -55,6 +55,11 @@ export function getAnimateFormat(type) {
   let special = false;
 
   switch (type) {
+    case "simpleFade":
+      rows = 1;
+      cols = 1;
+      break;
+
     case "curtainTopLeft":
     case "curtainBottomLeft":
     case "curtainSliceLeft":
@@ -90,6 +95,9 @@ export function getAnimateFormat(type) {
     case "mosaicRandom":
     case "mosaicSpiral":
     case "topLeftBottomRight":
+    case "bottomRightTopLeft":
+    case "bottomLeftTopRight":
+    case "topRightBottomLeft":
       rows = 4;
       cols = 6;
       special = true;
@@ -123,6 +131,16 @@ export function getTransitionStyles(type) {
   let delay = 100;
 
   switch (type) {
+    case "simpleFade":
+      fn = function style() {
+        return {
+          entering: { opacity: 0 },
+          entered: { opacity: 1 },
+          delay: 0
+        };
+      };
+      break;
+
     case "curtainTopLeft":
     case "curtainTopRight":
       fn = function style(el) {
@@ -130,8 +148,8 @@ export function getTransitionStyles(type) {
           entering: { marginTop: -el.containerHeight },
           entered: { marginTop: 0 },
           delay: el.reverse
-            ? 100 * (el.rows * el.cols - el.index - 1)
-            : 100 * el.index
+            ? delay * (el.rows * el.cols - el.index - 1)
+            : delay * el.index
         };
       };
       break;
@@ -143,8 +161,8 @@ export function getTransitionStyles(type) {
           entering: { marginTop: el.containerHeight },
           entered: { marginTop: 0 },
           delay: el.reverse
-            ? 100 * (el.rows * el.cols - el.index - 1)
-            : 100 * el.index
+            ? delay * (el.rows * el.cols - el.index - 1)
+            : delay * el.index
         };
       };
       break;
@@ -159,8 +177,8 @@ export function getTransitionStyles(type) {
           },
           entered: { margintop: 0 },
           delay: el.reverse
-            ? 100 * (el.rows * el.cols - el.index - 1)
-            : 100 * el.index
+            ? delay * (el.rows * el.cols - el.index - 1)
+            : delay * el.index
         };
       };
       break;
@@ -172,8 +190,8 @@ export function getTransitionStyles(type) {
           entering: { marginLeft: -el.containerWidth },
           entered: { marginLeft: 0 },
           delay: el.reverse
-            ? 100 * (el.rows * el.cols - el.index - 1)
-            : 100 * el.index
+            ? delay * (el.rows * el.cols - el.index - 1)
+            : delay * el.index
         };
       };
       break;
@@ -185,8 +203,8 @@ export function getTransitionStyles(type) {
           entering: { marginLeft: el.containerWidth },
           entered: { marginLeft: 0 },
           delay: el.reverse
-            ? 100 * (el.rows * el.cols - el.index - 1)
-            : 100 * el.index
+            ? delay * (el.rows * el.cols - el.index - 1)
+            : delay * el.index
         };
       };
       break;
@@ -201,8 +219,8 @@ export function getTransitionStyles(type) {
           },
           entered: { marginLeft: 0 },
           delay: el.reverse
-            ? 100 * (el.rows * el.cols - el.index - 1)
-            : 100 * el.index
+            ? delay * (el.rows * el.cols - el.index - 1)
+            : delay * el.index
         };
       };
       break;
@@ -213,20 +231,21 @@ export function getTransitionStyles(type) {
 
     case "mosaic":
     case "topLeftBottomRight":
-      delay = 100;
+      delay = type === "mosaic" ? 50 : 100;
       fn = function style(el) {
         return {
           entering: { width: 0, height: 0 },
           entered: { width: el.width, height: el.height },
           delay: el.reverse
-            ? 50 * (el.rows * el.cols - el.index - 1)
-            : 50 * el.index
+            ? delay * (el.rows * el.cols - el.index - 1)
+            : delay * el.index
         };
       };
       break;
 
     case "mosaicReverse":
-      delay = 50;
+    case "bottomRightTopLeft":
+      delay = type === "mosaicReverse" ? 50 : 100;
       fn = function style(el) {
         return {
           entering: {
@@ -242,8 +261,8 @@ export function getTransitionStyles(type) {
             marginLeft: 0
           },
           delay: el.reverse
-            ? 50 * (el.rows * el.cols - el.index - 1)
-            : 50 * el.index
+            ? delay * (el.rows * el.cols - el.index - 1)
+            : delay * el.index
         };
       };
       break;
@@ -267,8 +286,52 @@ export function getTransitionStyles(type) {
             marginLeft: 0
           },
           delay: el.reverse
-            ? 50 * (el.rows * el.cols - el.index - 1)
-            : 50 * el.index
+            ? delay * (el.rows * el.cols - el.index - 1)
+            : delay * el.index
+        };
+      };
+      break;
+
+    case "bottomLeftTopRight":
+      fn = function style(el) {
+        return {
+          entering: {
+            width: 0,
+            height: 0,
+            marginTop: el.height,
+            marginLeft: -el.width
+          },
+          entered: {
+            width: el.width,
+            height: el.height,
+            marginTop: 0,
+            marginLeft: 0
+          },
+          delay: el.reverse
+            ? delay * (el.rows * el.cols - el.index - 1)
+            : delay * el.index
+        };
+      };
+      break;
+
+    case "topRightBottomLeft":
+      fn = function style(el) {
+        return {
+          entering: {
+            width: 0,
+            height: 0,
+            marginTop: -el.height,
+            marginLeft: el.width
+          },
+          entered: {
+            width: el.width,
+            height: el.height,
+            marginTop: 0,
+            marginLeft: 0
+          },
+          delay: el.reverse
+            ? delay * (el.rows * el.cols - el.index - 1)
+            : delay * el.index
         };
       };
       break;
@@ -284,12 +347,11 @@ export function getTransitionStyles(type) {
 
 export function specialAnimate(type, blocks) {
   let easing = "cubic-bezier(0.77, 0, 0.175, 1)";
-  const shuffleArr = shuffle([...Array(blocks.length).keys()]);
   const rows = blocks[0].rows;
   const cols = blocks[0].cols;
-
   switch (type) {
-    case "stampede":
+    case "stampede": {
+      const shuffleArr = shuffle([...Array(blocks.length).keys()]);
       blocks.forEach((el, idx) => {
         el.transitionStyles = {
           entering: {
@@ -307,16 +369,17 @@ export function specialAnimate(type, blocks) {
           delay: 0
         };
       });
-
       easing = "ease-in-out";
       break;
+    }
 
-    case "mosaicRandom":
+    case "mosaicRandom": {
+      const shuffleArr = shuffle([...Array(blocks.length).keys()]);
       blocks.forEach((el, idx) => {
         el.transitionStyles.delay = 50 * shuffleArr[idx];
       });
-
       break;
+    }
 
     case "mosaicSpiral": {
       const rows2 = rows / 2;
@@ -386,6 +449,48 @@ export function specialAnimate(type, blocks) {
       for (let y = 0; y < rows; y++)
         for (let x = 0; x < cols; x++) {
           arr.push(x + y);
+        }
+
+      blocks.forEach((el, idx) => {
+        el.transitionStyles.delay = 200 * arr[idx];
+      });
+      break;
+    }
+
+    case "bottomRightTopLeft": {
+      const arr = [];
+
+      for (let y = 0; y < rows; y++)
+        for (let x = 0; x < cols; x++) {
+          arr.push(cols + rows - x - y);
+        }
+
+      blocks.forEach((el, idx) => {
+        el.transitionStyles.delay = 200 * arr[idx];
+      });
+      break;
+    }
+
+    case "bottomLeftTopRight": {
+      const arr = [];
+
+      for (let y = 0; y < rows; y++)
+        for (let x = 0; x < cols; x++) {
+          arr.push(x + cols - y);
+        }
+
+      blocks.forEach((el, idx) => {
+        el.transitionStyles.delay = 200 * arr[idx];
+      });
+      break;
+    }
+
+    case "topRightBottomLeft": {
+      const arr = [];
+
+      for (let y = 0; y < rows; y++)
+        for (let x = 0; x < cols; x++) {
+          arr.push(y + cols - x);
         }
 
       blocks.forEach((el, idx) => {

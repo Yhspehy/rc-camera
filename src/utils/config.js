@@ -1,4 +1,5 @@
 const animateTypeList = [
+  "simpleFade",
   "scrollTop",
   "scrollLeft",
   "scrollBottom",
@@ -21,7 +22,10 @@ const animateTypeList = [
   "mosaicRandom",
   "mosaicSpiral",
   "mosaicSpiralReverse",
-  "topLeftBottomRight"
+  "topLeftBottomRight",
+  "bottomRightTopLeft",
+  "bottomLeftTopRight",
+  "topRightBottomLeft"
 ];
 
 export default animateTypeList;
