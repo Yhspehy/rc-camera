@@ -17,7 +17,9 @@ class Camera extends React.Component {
     animateType: PropTypes.string,
     duration: PropTypes.number,
     easing: PropTypes.string,
-    contentBar: PropTypes.oneOfType([PropTypes.func, PropTypes.oneOf([null])])
+    contentBar: PropTypes.oneOfType([PropTypes.func, PropTypes.oneOf([null])]),
+    prevBtn: PropTypes.oneOfType([PropTypes.func, PropTypes.oneOf([null])]),
+    nextBtn: PropTypes.oneOfType([PropTypes.func, PropTypes.oneOf([null])])
   };
 
   static defaultProps = {
@@ -42,7 +44,9 @@ class Camera extends React.Component {
      *  <div style={{ color: "red" }}>{content}</div>
      * )
      */
-    contentBar: null
+    contentBar: null,
+    prevBtn: null,
+    nextBtn: null
   };
 
   constructor(props) {
@@ -74,7 +78,7 @@ class Camera extends React.Component {
     this.getHeight();
   }
 
-  getHeight = () => {
+  getHeight = async () => {
     this.setState({
       height: this.cameraRef.current.clientWidth * this.props.aspectRadio
     });
@@ -132,7 +136,9 @@ class Camera extends React.Component {
       slideOn,
       duration,
       easing,
-      contentBar
+      contentBar,
+      prevBtn,
+      nextBtn
     } = this.props;
     const {
       current,
@@ -159,33 +165,38 @@ class Camera extends React.Component {
           >
             <div>
               {height > 0 ? (
-                <TargetContainer
-                  prefixCls={prefixCls}
-                  width={this.cameraRef.current.clientWidth}
-                  height={height}
-                  imgList={imgList}
-                  current={current}
-                  nextIndex={nextIndex}
-                  isAnimate={isAnimate}
-                  handleAnimate={this.handleAnimate}
-                  slideOn={slideOn}
-                  animateType={animateType}
-                  duration={duration}
-                  easing={easing}
-                  contentBar={contentBar}
-                />
+                <div>
+                  <TargetContainer
+                    prefixCls={prefixCls}
+                    width={this.cameraRef.current.clientWidth}
+                    height={height}
+                    imgList={imgList}
+                    current={current}
+                    nextIndex={nextIndex}
+                    isAnimate={isAnimate}
+                    handleAnimate={this.handleAnimate}
+                    slideOn={slideOn}
+                    animateType={animateType}
+                    duration={duration}
+                    easing={easing}
+                    contentBar={contentBar}
+                  />
+                  <ButtonContainer
+                    width={this.cameraRef.current.clientWidth}
+                    height={height}
+                    prefixCls={prefixCls}
+                    imgList={imgList}
+                    current={current}
+                    handleClick={this.handleClick}
+                    isHover={isHover}
+                    prevBtn={prevBtn}
+                    nextBtn={nextBtn}
+                  />
+                </div>
               ) : (
                 <div> 初始化中....</div>
               )}
             </div>
-
-            <ButtonContainer
-              prefixCls={prefixCls}
-              imgCount={imgList.length}
-              current={current}
-              handleClick={this.handleClick}
-              isHover={isHover}
-            />
           </div>
         </div>
       </div>

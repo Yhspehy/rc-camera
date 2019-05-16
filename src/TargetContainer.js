@@ -149,8 +149,6 @@ export default class TargetContainre extends React.PureComponent {
     // 过渡style计算函数
     const { delay, transitonStyleFn } = getTransitionStyles(animateType);
 
-    console.log(animateType);
-
     for (let i = 0; i < blockNum; i++) {
       if (i % cols < leftScrap) {
         addLeft = 1;

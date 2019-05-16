@@ -16,6 +16,30 @@ function App() {
       img: "../assets/images/slides/sea.jpg",
       content:
         "2222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222"
+    },
+    {
+      thumb: "../assets/images/slides/thumbs/leaf.jpg",
+      img: "../assets/images/slides/leaf.jpg",
+      content:
+        "这是一大段中文，发现中文竟然可以自动换行这是一大段中文，发现中文竟然可以自动换行这是一大段中文，发现中文竟然可以自动换行这是一大段中文，发现中文竟然可以自动换行"
+    },
+    {
+      thumb: "../assets/images/slides/thumbs/road.jpg",
+      img: "../assets/images/slides/road.jpg",
+      content:
+        "这是一大段中文，发现中文竟然可以自动换行这是一大段中文，发现中文竟然可以自动换行这是一大段中文，发现中文竟然可以自动换行这是一大段中文，发现中文竟然可以自动换行"
+    },
+    {
+      thumb: "../assets/images/slides/thumbs/tree.jpg",
+      img: "../assets/images/slides/tree.jpg",
+      content:
+        "这是一大段中文，发现中文竟然可以自动换行这是一大段中文，发现中文竟然可以自动换行这是一大段中文，发现中文竟然可以自动换行这是一大段中文，发现中文竟然可以自动换行"
+    },
+    {
+      thumb: "../assets/images/slides/thumbs/shelter.jpg",
+      img: "../assets/images/slides/shelter.jpg",
+      content:
+        "这是一大段中文，发现中文竟然可以自动换行这是一大段中文，发现中文竟然可以自动换行这是一大段中文，发现中文竟然可以自动换行这是一大段中文，发现中文竟然可以自动换行"
     }
   ];
   return <Camera imgList={imgList} />;
