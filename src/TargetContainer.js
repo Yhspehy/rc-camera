@@ -22,7 +22,8 @@ export default class TargetContainre extends React.PureComponent {
     slideOn: PropTypes.string,
     animateType: PropTypes.string,
     duration: PropTypes.number,
-    easing: PropTypes.string
+    easing: PropTypes.string,
+    contentBar: PropTypes.oneOfType([PropTypes.func, PropTypes.oneOf([null])])
   };
 
   // shouldComponentUpdate(nextProps) {
@@ -244,7 +245,8 @@ export default class TargetContainre extends React.PureComponent {
       current,
       isAnimate,
       slideOn,
-      animateType
+      animateType,
+      contentBar
     } = this.props;
 
     let animateContainer = null;
@@ -264,6 +266,17 @@ export default class TargetContainre extends React.PureComponent {
         }
       }
     }
+
+    const contentTransition = {
+      entering: { opacity: 1, transform: "translateY(0px)" },
+      entered: { opacity: 1, transform: "translateY(0px)" },
+      exiting: { opacity: 0, transform: "translateY(0px)" },
+      exited: { opacity: 0, transform: "translateY(40px)" }
+    };
+
+    const contentBarNode = contentBar
+      ? contentBar(imgList[current].content)
+      : null;
 
     return (
       <div className={`${prefixCls}-target-item`}>
@@ -286,9 +299,35 @@ export default class TargetContainre extends React.PureComponent {
         {animateContainer}
 
         {/* 图片底部内容 */}
-        {/* <div className={`${prefixCls}-target-item-content`}>
-          {imgList[current].content}
-        </div> */}
+        <Transition
+          in={!isAnimate}
+          timeout={{
+            apear: 0,
+            enter: 1000,
+            exit: 1000
+          }}
+        >
+          {state => (
+            <div className={`${prefixCls}-target-item-content-wrap`}>
+              {contentBar ? (
+                React.cloneElement(contentBarNode, {
+                  className: `${prefixCls}-target-item-content`,
+                  style: {
+                    ...contentTransition[state],
+                    ...contentBarNode.props.style
+                  }
+                })
+              ) : (
+                <div
+                  className={`${prefixCls}-target-item-content`}
+                  style={contentTransition[state]}
+                >
+                  {imgList[current].content}
+                </div>
+              )}
+            </div>
+          )}
+        </Transition>
       </div>
     );
   }

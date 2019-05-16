@@ -16,7 +16,8 @@ class Camera extends React.Component {
     slideOn: PropTypes.string,
     animateType: PropTypes.string,
     duration: PropTypes.number,
-    easing: PropTypes.string
+    easing: PropTypes.string,
+    contentBar: PropTypes.oneOfType([PropTypes.func, PropTypes.oneOf([null])])
   };
 
   static defaultProps = {
@@ -26,9 +27,22 @@ class Camera extends React.Component {
     imgList: [],
     current: 0,
     slideOn: "next",
-    animateType: "simpleFade",
+    animateType: "random",
     duration: 1000,
-    easing: "cubic-bezier(0.77, 0, 0.175, 1)"
+    easing: "cubic-bezier(0.77, 0, 0.175, 1)",
+    /**
+     * 自定义contentBar,会自动合并传入的style
+     * 默认会传入当前的内容
+     *
+     * @param {content} 当前的内容
+     *
+     * @example
+     *
+     * content => (
+     *  <div style={{ color: "red" }}>{content}</div>
+     * )
+     */
+    contentBar: null
   };
 
   constructor(props) {
@@ -111,7 +125,15 @@ class Camera extends React.Component {
   };
 
   render() {
-    const { imgList, prefixCls, width, slideOn, duration, easing } = this.props;
+    const {
+      imgList,
+      prefixCls,
+      width,
+      slideOn,
+      duration,
+      easing,
+      contentBar
+    } = this.props;
     const {
       current,
       height,
@@ -150,6 +172,7 @@ class Camera extends React.Component {
                   animateType={animateType}
                   duration={duration}
                   easing={easing}
+                  contentBar={contentBar}
                 />
               ) : (
                 <div> 初始化中....</div>

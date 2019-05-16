@@ -8,12 +8,14 @@ function App() {
     {
       thumb: "../assets/images/slides/thumbs/bridge.jpg",
       img: "../assets/images/slides/bridge.jpg",
-      content: "1111"
+      content:
+        "这是一大段中文，发现中文竟然可以自动换行这是一大段中文，发现中文竟然可以自动换行这是一大段中文，发现中文竟然可以自动换行这是一大段中文，发现中文竟然可以自动换行"
     },
     {
       thumb: "../assets/images/slides/thumbs/sea.jpg",
       img: "../assets/images/slides/sea.jpg",
-      content: "2222"
+      content:
+        "2222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222"
     }
   ];
   return <Camera imgList={imgList} />;

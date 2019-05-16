@@ -37,13 +37,22 @@
         bottom: 0;
       }
 
-      &-content {
+      &-content-wrap {
         position: absolute;
         bottom: 0;
+        width: 100%;
+      }
+
+      &-content {
         width: 100%;
         background: rgba(0, 0, 0, 0.8);
         color: #fff;
         padding: 10px 20px;
+        transition-property: opacity, transform;
+        transition-duration: 1s;
+        word-break: break-word;
+        font-size: 18px;
+        line-height: 26px;
       }
     }
 
@@ -52,4 +61,8 @@
       z-index: 99;
     }
   }
+}
+
+.a {
+  font-size: 30px
 }
