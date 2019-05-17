@@ -18,6 +18,7 @@ class Camera extends React.Component {
     duration: PropTypes.number,
     easing: PropTypes.string,
     contentBar: PropTypes.oneOfType([PropTypes.func, PropTypes.oneOf([null])]),
+    contentBarWrapStyle: PropTypes.object,
     prevBtn: PropTypes.oneOfType([PropTypes.node, PropTypes.oneOf([null])]),
     nextBtn: PropTypes.oneOfType([PropTypes.node, PropTypes.oneOf([null])])
   };
@@ -33,7 +34,7 @@ class Camera extends React.Component {
     duration: 1000,
     easing: "cubic-bezier(0.77, 0, 0.175, 1)",
     /**
-     * 自定义contentBar,会自动合并传入的style
+     * 自定义contentBar
      * 默认会传入当前的内容
      *
      * @param {content} 当前的内容
@@ -44,7 +45,8 @@ class Camera extends React.Component {
      *  <div style={{ color: "red" }}>{content}</div>
      * )
      */
-    contentBar: null,
+    contentBar: content => <div style={{ color: "red" }}>{content}</div>,
+    contentBarWrapStyle: {},
     prevBtn: null,
     nextBtn: null
   };
@@ -137,6 +139,7 @@ class Camera extends React.Component {
       duration,
       easing,
       contentBar,
+      contentBarWrapStyle,
       prevBtn,
       nextBtn
     } = this.props;
@@ -180,6 +183,7 @@ class Camera extends React.Component {
                     duration={duration}
                     easing={easing}
                     contentBar={contentBar}
+                    contentBarWrapStyle={contentBarWrapStyle}
                   />
                   <ButtonContainer
                     width={this.cameraRef.current.clientWidth}

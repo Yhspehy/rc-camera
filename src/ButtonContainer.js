@@ -42,7 +42,7 @@ export default class ButtonContainer extends React.PureComponent {
     handleClick(i);
   };
 
-  _getMainColor = async i => {
+  _getMainColor = i => {
     const { imgList, height, width, prevBtn, nextBtn } = this.props;
 
     const prevPromise = prevBtn
