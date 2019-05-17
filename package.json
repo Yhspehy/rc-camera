@@ -22,7 +22,7 @@
   },
   "scripts": {
     "dist": "rc-tools run dist",
-    "build": "rc-tools run build",
+    "build": "rc-tools run build --babel-runtime",
     "compile": "rc-tools run compile --babel-runtime",
     "gh-pages": "rc-tools run gh-pages",
     "start": "rc-tools run server --babel-runtime",
