@@ -18,8 +18,8 @@ class Camera extends React.Component {
     duration: PropTypes.number,
     easing: PropTypes.string,
     contentBar: PropTypes.oneOfType([PropTypes.func, PropTypes.oneOf([null])]),
-    prevBtn: PropTypes.oneOfType([PropTypes.func, PropTypes.oneOf([null])]),
-    nextBtn: PropTypes.oneOfType([PropTypes.func, PropTypes.oneOf([null])])
+    prevBtn: PropTypes.oneOfType([PropTypes.node, PropTypes.oneOf([null])]),
+    nextBtn: PropTypes.oneOfType([PropTypes.node, PropTypes.oneOf([null])])
   };
 
   static defaultProps = {
