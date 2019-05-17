@@ -13,9 +13,7 @@ function App() {
     },
     {
       thumb: "../assets/images/slides/thumbs/sea.jpg",
-      img: "../assets/images/slides/sea.jpg",
-      content:
-        "2222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222"
+      img: "../assets/images/slides/sea.jpg"
     },
     {
       thumb: "../assets/images/slides/thumbs/leaf.jpg",

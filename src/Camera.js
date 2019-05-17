@@ -29,7 +29,7 @@ class Camera extends React.Component {
     prefixCls: "rc-camera",
     imgList: [],
     current: 0,
-    slideOn: "next",
+    slideOn: "random",
     animateType: "random",
     duration: 1000,
     easing: "cubic-bezier(0.77, 0, 0.175, 1)",
@@ -64,6 +64,7 @@ class Camera extends React.Component {
     const animateType =
       props.animateType === "random" ? "scrollTop" : props.animateType;
 
+    const slideOn = props.slideOn === "random" ? "next" : props.slideOn;
     this.cameraRef = React.createRef();
 
     this.state = {
@@ -72,7 +73,8 @@ class Camera extends React.Component {
       isAnimate: false,
       height: 0,
       isHover: false,
-      animateType
+      animateType,
+      slideOn
     };
   }
 
@@ -97,6 +99,14 @@ class Camera extends React.Component {
     }
   };
 
+  getSlideOn = () => {
+    if (this.props.animateType === "random") {
+      this.setState({
+        slideOn: Math.random() > 0.5 ? "prev" : "next"
+      });
+    }
+  };
+
   mouseEnter = () => {
     this.setState({
       isHover: true
@@ -116,6 +126,7 @@ class Camera extends React.Component {
       return;
     }
     this.getAnimateType();
+    this.getSlideOn();
     this.setState({
       nextIndex: next,
       isAnimate: true
@@ -135,7 +146,6 @@ class Camera extends React.Component {
       imgList,
       prefixCls,
       width,
-      slideOn,
       duration,
       easing,
       contentBar,
@@ -149,7 +159,8 @@ class Camera extends React.Component {
       isHover,
       nextIndex,
       isAnimate,
-      animateType
+      animateType,
+      slideOn
     } = this.state;
 
     return (

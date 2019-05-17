@@ -15,12 +15,19 @@ export default class Content extends React.PureComponent {
 
   state = {
     contentTransition: {
-      entering: { opacity: 1, transform: "translateY(0px)" },
+      entering: { opacity: 1, transform: "translateY(100%)" },
       entered: { opacity: 1, transform: "translateY(0px)" },
       exiting: { opacity: 0, transform: "translateY(0px)" },
       exited: { opacity: 0, transform: "translateY(100%)" }
     }
   };
+
+  renderContentBarNode = () => {
+    const { contentBar, imgList, current } = this.props;
+
+    return contentBar(imgList[current].content);
+  };
+
   render() {
     const {
       prefixCls,
@@ -33,21 +40,23 @@ export default class Content extends React.PureComponent {
 
     const { contentTransition } = this.state;
 
-    const contentBarNode = contentBar
-      ? contentBar(imgList[current].content)
-      : null;
-
     return (
-      <Transition in={!isAnimate} timeout={0}>
-        {state => (
-          <div
-            className={`${prefixCls}-target-content-wrap`}
-            style={{ ...contentTransition[state], ...contentBarWrapStyle }}
-          >
-            {contentBar ? contentBarNode : imgList[current].content}
-          </div>
-        )}
-      </Transition>
+      <React.Fragment>
+        {imgList[current].content ? (
+          <Transition in={!isAnimate} timeout={0} appear>
+            {state => (
+              <div
+                className={`${prefixCls}-target-content-wrap`}
+                style={{ ...contentTransition[state], ...contentBarWrapStyle }}
+              >
+                {contentBar
+                  ? this.renderContentBarNode()
+                  : imgList[current].content}
+              </div>
+            )}
+          </Transition>
+        ) : null}
+      </React.Fragment>
     );
   }
 }
