@@ -77,11 +77,11 @@ export default class TargetContainre extends React.PureComponent {
     this.animateOver();
 
     return (
-      <TransitionGroup className={`${prefixCls}-target-item-img-container`}>
+      <TransitionGroup className={`${prefixCls}-target-img-container`}>
         <Transition appear in timeout={0}>
           {state => (
             <img
-              className={`${prefixCls}-target-item-img`}
+              className={`${prefixCls}-target-img`}
               src={imgList[current].img}
               style={{
                 ...transitionPrevStyles[state],
@@ -99,7 +99,7 @@ export default class TargetContainre extends React.PureComponent {
         <Transition appear in timeout={0}>
           {state => (
             <img
-              className={`${prefixCls}-target-item-img`}
+              className={`${prefixCls}-target-img`}
               src={imgList[nextIndex].img}
               style={{
                 ...transitionNextStyles[state],
@@ -211,7 +211,7 @@ export default class TargetContainre extends React.PureComponent {
     this.animateOver(blockNum * delay);
 
     return (
-      <TransitionGroup className={`${prefixCls}-target-item-img-container`}>
+      <TransitionGroup className={`${prefixCls}-target-img-container`}>
         {blocks.map((el, idx) => (
           <Transition key={idx} appear in timeout={el.transitionStyles.delay}>
             {state => (
@@ -270,12 +270,12 @@ export default class TargetContainre extends React.PureComponent {
     }
 
     return (
-      <div className={`${prefixCls}-target-item`}>
+      <div className={`${prefixCls}-target`}>
         {/* 默认图片 */}
         {imgList.map((el, idx) => (
           <img
             key={idx}
-            className={`${prefixCls}-target-item-img`}
+            className={`${prefixCls}-target-img`}
             style={{
               width,
               height,

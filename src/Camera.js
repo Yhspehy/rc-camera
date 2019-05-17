@@ -154,54 +154,48 @@ class Camera extends React.Component {
 
     return (
       <div className={prefixCls}>
-        <div className={`${prefixCls}-container`}>
-          {/* 图片容器 */}
-          <div
-            onMouseEnter={this.mouseEnter}
-            onMouseLeave={this.mouseLeave}
-            className={`${prefixCls}-target`}
-            ref={this.cameraRef}
-            style={{
-              width,
-              height
-            }}
-          >
-            <div>
-              {height > 0 ? (
-                <div>
-                  <TargetContainer
-                    prefixCls={prefixCls}
-                    width={this.cameraRef.current.clientWidth}
-                    height={height}
-                    imgList={imgList}
-                    current={current}
-                    nextIndex={nextIndex}
-                    isAnimate={isAnimate}
-                    handleAnimate={this.handleAnimate}
-                    slideOn={slideOn}
-                    animateType={animateType}
-                    duration={duration}
-                    easing={easing}
-                    contentBar={contentBar}
-                    contentBarWrapStyle={contentBarWrapStyle}
-                  />
-                  <ButtonContainer
-                    width={this.cameraRef.current.clientWidth}
-                    height={height}
-                    prefixCls={prefixCls}
-                    imgList={imgList}
-                    current={current}
-                    handleClick={this.handleClick}
-                    isHover={isHover}
-                    prevBtn={prevBtn}
-                    nextBtn={nextBtn}
-                  />
-                </div>
-              ) : (
-                <div> 初始化中....</div>
-              )}
-            </div>
-          </div>
+        <div
+          className={`${prefixCls}-container`}
+          onMouseEnter={this.mouseEnter}
+          onMouseLeave={this.mouseLeave}
+          ref={this.cameraRef}
+          style={{
+            width,
+            height
+          }}
+        >
+          {height > 0 ? (
+            <React.Fragment>
+              <TargetContainer
+                prefixCls={prefixCls}
+                width={this.cameraRef.current.clientWidth}
+                height={height}
+                imgList={imgList}
+                current={current}
+                nextIndex={nextIndex}
+                isAnimate={isAnimate}
+                handleAnimate={this.handleAnimate}
+                slideOn={slideOn}
+                animateType={animateType}
+                duration={duration}
+                easing={easing}
+                contentBar={contentBar}
+                contentBarWrapStyle={contentBarWrapStyle}
+              />
+
+              <ButtonContainer
+                width={this.cameraRef.current.clientWidth}
+                height={height}
+                prefixCls={prefixCls}
+                imgList={imgList}
+                current={current}
+                handleClick={this.handleClick}
+                isHover={isHover}
+                prevBtn={prevBtn}
+                nextBtn={nextBtn}
+              />
+            </React.Fragment>
+          ) : null}
         </div>
       </div>
     );

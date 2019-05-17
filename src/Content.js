@@ -41,7 +41,7 @@ export default class Content extends React.PureComponent {
       <Transition in={!isAnimate} timeout={0}>
         {state => (
           <div
-            className={`${prefixCls}-target-item-content-wrap`}
+            className={`${prefixCls}-target-content-wrap`}
             style={{ ...contentTransition[state], ...contentBarWrapStyle }}
           >
             {contentBar ? contentBarNode : imgList[current].content}
