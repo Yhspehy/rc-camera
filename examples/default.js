@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Camera from "../index.js";
-import "../assets/index.less";
+import Camera from "rc-camera";
+import "rc-camera/assets/index.less";
 
 function App() {
   const imgList = [

@@ -16,9 +16,23 @@
   "bugs": {
     "url": "https://github.com/Yhspehy/rc-camera/issues"
   },
+  "files": [
+    "es",
+    "lib",
+    "assets/*.css"
+  ],
+  "main": "./lib/index",
+  "module": "./es/index",
   "license": "MIT",
   "config": {
-    "port": 8007
+    "port": 8007,
+    "entry": {
+      "rc-camera": [
+        "./assets/index.less",
+        "./src/index.js"
+      ]
+    }
+
   },
   "scripts": {
     "dist": "rc-tools run dist",

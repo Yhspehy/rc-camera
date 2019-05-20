@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import TargetContainer from "./TargetContainer";
 import ButtonContainer from "./ButtonContainer";
-
+import Pagination from "./Pagination";
 import animateTypeList from "./utils/config";
 
 class Camera extends React.Component {
@@ -20,7 +20,8 @@ class Camera extends React.Component {
     contentBar: PropTypes.oneOfType([PropTypes.func, PropTypes.oneOf([null])]),
     contentBarWrapStyle: PropTypes.object,
     prevBtn: PropTypes.oneOfType([PropTypes.node, PropTypes.oneOf([null])]),
-    nextBtn: PropTypes.oneOfType([PropTypes.node, PropTypes.oneOf([null])])
+    nextBtn: PropTypes.oneOfType([PropTypes.node, PropTypes.oneOf([null])]),
+    pagination: PropTypes.bool
   };
 
   static defaultProps = {
@@ -48,7 +49,8 @@ class Camera extends React.Component {
     contentBar: content => <div style={{ color: "red" }}>{content}</div>,
     contentBarWrapStyle: {},
     prevBtn: null,
-    nextBtn: null
+    nextBtn: null,
+    pagination: true
   };
 
   constructor(props) {
@@ -151,7 +153,8 @@ class Camera extends React.Component {
       contentBar,
       contentBarWrapStyle,
       prevBtn,
-      nextBtn
+      nextBtn,
+      pagination
     } = this.props;
     const {
       current,
@@ -205,6 +208,16 @@ class Camera extends React.Component {
                 prevBtn={prevBtn}
                 nextBtn={nextBtn}
               />
+
+              {pagination && (
+                <Pagination
+                  prefixCls={prefixCls}
+                  imgList={imgList}
+                  current={current}
+                  nextIndex={nextIndex}
+                  handleClick={this.handleClick}
+                />
+              )}
             </React.Fragment>
           ) : null}
         </div>
