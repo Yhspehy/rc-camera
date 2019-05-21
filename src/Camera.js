@@ -6,7 +6,9 @@ import ButtonContainer from "./ButtonContainer";
 import Pagination from "./Pagination";
 import animateTypeList from "./utils/config";
 
-class Camera extends React.Component {
+let autoPlayTimeOut;
+
+class Camera extends React.PureComponent {
   static propTypes = {
     width: PropTypes.string,
     aspectRadio: PropTypes.number,
@@ -21,9 +23,10 @@ class Camera extends React.Component {
     contentBarWrapStyle: PropTypes.object,
     prevBtn: PropTypes.oneOfType([PropTypes.node, PropTypes.oneOf([null])]),
     nextBtn: PropTypes.oneOfType([PropTypes.node, PropTypes.oneOf([null])]),
-    pagination: PropTypes.bool
+    pagination: PropTypes.bool,
+    autoPlay: PropTypes.bool,
+    autoPlayTime: PropTypes.number
   };
-
   static defaultProps = {
     width: "100%",
     aspectRadio: 0.5,
@@ -31,7 +34,7 @@ class Camera extends React.Component {
     imgList: [],
     current: 0,
     slideOn: "random",
-    animateType: "curtainTopLeft",
+    animateType: "topLeftBottomRight",
     duration: 1000,
     easing: "cubic-bezier(0.77, 0, 0.175, 1)",
     /**
@@ -50,7 +53,9 @@ class Camera extends React.Component {
     contentBarWrapStyle: {},
     prevBtn: null,
     nextBtn: null,
-    pagination: true
+    pagination: true,
+    autoPlay: false,
+    autoPlayTime: 5000
   };
 
   constructor(props) {
@@ -82,6 +87,7 @@ class Camera extends React.Component {
 
   componentDidMount() {
     this.getHeight();
+    this.setAutoPlay();
   }
 
   getHeight = async () => {
@@ -109,6 +115,17 @@ class Camera extends React.Component {
     }
   };
 
+  setAutoPlay = () => {
+    const { current } = this.state;
+    const { autoPlay, imgList, autoPlayTime } = this.props;
+    if (autoPlay) {
+      autoPlayTimeOut = setTimeout(() => {
+        const i = current === imgList.length - 1 ? 0 : current + 1;
+        this.handleClick(i, true);
+      }, autoPlayTime);
+    }
+  };
+
   mouseEnter = () => {
     this.setState({
       isHover: true
@@ -122,10 +139,13 @@ class Camera extends React.Component {
   };
 
   // 按钮点击事件
-  handleClick = next => {
+  handleClick = (next, isAuto = false) => {
     const { isAnimate } = this.state;
     if (isAnimate) {
       return;
+    }
+    if (!isAuto) {
+      clearTimeout(autoPlayTimeOut);
     }
     this.getAnimateType();
     this.getSlideOn();
@@ -137,10 +157,13 @@ class Camera extends React.Component {
 
   // 动画执行完毕
   handleAnimate = (c, a) => {
-    this.setState({
-      current: c,
-      isAnimate: !!a
-    });
+    this.setState(
+      {
+        current: c,
+        isAnimate: !!a
+      },
+      () => this.setAutoPlay()
+    );
   };
 
   render() {
@@ -225,4 +248,5 @@ class Camera extends React.Component {
     );
   }
 }
+
 export default Camera;

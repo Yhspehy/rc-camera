@@ -75,6 +75,8 @@ export default class AnimateNode extends React.PureComponent {
     let topWidth = 0;
     let leftWidth = 0;
     let finalEasing = easing;
+    let row = 1;
+    let col = 1;
     // 过渡style计算函数
     const { delay, transitonStyleFn } = getTransitionStyles(animateType);
 
@@ -83,9 +85,6 @@ export default class AnimateNode extends React.PureComponent {
         addLeft = 1;
       } else {
         addLeft = 0;
-      }
-      if (i % cols === 0) {
-        leftWidth = 0;
       }
       if (Math.floor(i / cols) < topScrap) {
         addTop = 1;
@@ -102,6 +101,8 @@ export default class AnimateNode extends React.PureComponent {
         index: i,
         rows,
         cols,
+        row,
+        col,
         reverse,
         width: elWidth,
         height: elHeight,
@@ -116,9 +117,14 @@ export default class AnimateNode extends React.PureComponent {
         }
       });
 
-      leftWidth += Math.floor(width / cols) + addLeft;
       if (i % cols === cols - 1) {
+        leftWidth = 0;
         topWidth += Math.floor(height / rows) + addTop;
+        col = 1;
+        row += 1;
+      } else {
+        leftWidth += Math.floor(width / cols) + addLeft;
+        col += 1;
       }
     }
 

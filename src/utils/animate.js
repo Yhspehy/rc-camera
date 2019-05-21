@@ -94,13 +94,17 @@ export function getAnimateFormat(type) {
     case "stampede":
     case "mosaicRandom":
     case "mosaicSpiral":
+      rows = 4;
+      cols = 6;
+      special = true;
+      break;
+
     case "topLeftBottomRight":
     case "bottomRightTopLeft":
     case "bottomLeftTopRight":
     case "topRightBottomLeft":
       rows = 4;
       cols = 6;
-      special = true;
       break;
 
     case "mosaicReverse":
@@ -230,22 +234,18 @@ export function getTransitionStyles(type) {
       break;
 
     case "mosaic":
-    case "topLeftBottomRight":
-      delay = type === "mosaic" ? 50 : 100;
+      delay = 50;
       fn = function style(el) {
         return {
           entering: { width: 0, height: 0 },
           entered: { width: el.width, height: el.height },
-          delay: el.reverse
-            ? delay * (el.rows * el.cols - el.index - 1)
-            : delay * el.index
+          delay: delay * el.index
         };
       };
       break;
 
     case "mosaicReverse":
-    case "bottomRightTopLeft":
-      delay = type === "mosaicReverse" ? 50 : 100;
+      delay = 50;
       fn = function style(el) {
         return {
           entering: {
@@ -260,14 +260,32 @@ export function getTransitionStyles(type) {
             marginTop: 0,
             marginLeft: 0
           },
-          delay: el.reverse
-            ? delay * (el.rows * el.cols - el.index - 1)
-            : delay * el.index
+          delay: delay * (el.rows * el.cols - el.index - 1)
         };
       };
       break;
 
     case "mosaicRandom":
+      delay = 50;
+      fn = function style(el) {
+        return {
+          entering: {
+            width: 0,
+            height: 0,
+            marginTop: el.height * 0.5,
+            marginLeft: el.width * 0.5
+          },
+          entered: {
+            width: el.width,
+            height: el.height,
+            marginTop: 0,
+            marginLeft: 0
+          },
+          delay: 0
+        };
+      };
+      break;
+
     case "mosaicSpiral":
     case "mosaicSpiralReverse":
       delay = 50;
@@ -292,6 +310,36 @@ export function getTransitionStyles(type) {
       };
       break;
 
+    case "topLeftBottomRight":
+      fn = function style(el) {
+        return {
+          entering: { width: 0, height: 0 },
+          entered: { width: el.width, height: el.height },
+          delay: 200 * (el.row + el.col - 2)
+        };
+      };
+      break;
+
+    case "bottomRightTopLeft":
+      fn = function style(el) {
+        return {
+          entering: {
+            width: 0,
+            height: 0,
+            marginTop: el.height,
+            marginLeft: el.width
+          },
+          entered: {
+            width: el.width,
+            height: el.height,
+            marginTop: 0,
+            marginLeft: 0
+          },
+          delay: 200 * (el.rows + el.cols - el.row - el.col + 2)
+        };
+      };
+      break;
+
     case "bottomLeftTopRight":
       fn = function style(el) {
         return {
@@ -307,9 +355,7 @@ export function getTransitionStyles(type) {
             marginTop: 0,
             marginLeft: 0
           },
-          delay: el.reverse
-            ? delay * (el.rows * el.cols - el.index - 1)
-            : delay * el.index
+          delay: 200 * (el.col + el.cols - el.row - 2)
         };
       };
       break;
@@ -329,9 +375,7 @@ export function getTransitionStyles(type) {
             marginTop: 0,
             marginLeft: 0
           },
-          delay: el.reverse
-            ? delay * (el.rows * el.cols - el.index - 1)
-            : delay * el.index
+          delay: 200 * (el.row + el.cols - el.col - 2)
         };
       };
       break;
@@ -440,62 +484,6 @@ export function specialAnimate(type, blocks) {
           n--;
         }
       }
-      break;
-    }
-
-    case "topLeftBottomRight": {
-      const arr = [];
-
-      for (let y = 0; y < rows; y++)
-        for (let x = 0; x < cols; x++) {
-          arr.push(x + y);
-        }
-
-      blocks.forEach((el, idx) => {
-        el.transitionStyles.delay = 200 * arr[idx];
-      });
-      break;
-    }
-
-    case "bottomRightTopLeft": {
-      const arr = [];
-
-      for (let y = 0; y < rows; y++)
-        for (let x = 0; x < cols; x++) {
-          arr.push(cols + rows - x - y);
-        }
-
-      blocks.forEach((el, idx) => {
-        el.transitionStyles.delay = 200 * arr[idx];
-      });
-      break;
-    }
-
-    case "bottomLeftTopRight": {
-      const arr = [];
-
-      for (let y = 0; y < rows; y++)
-        for (let x = 0; x < cols; x++) {
-          arr.push(x + cols - y);
-        }
-
-      blocks.forEach((el, idx) => {
-        el.transitionStyles.delay = 200 * arr[idx];
-      });
-      break;
-    }
-
-    case "topRightBottomLeft": {
-      const arr = [];
-
-      for (let y = 0; y < rows; y++)
-        for (let x = 0; x < cols; x++) {
-          arr.push(y + cols - x);
-        }
-
-      blocks.forEach((el, idx) => {
-        el.transitionStyles.delay = 200 * arr[idx];
-      });
       break;
     }
 
