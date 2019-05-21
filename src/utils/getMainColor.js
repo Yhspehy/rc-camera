@@ -65,7 +65,7 @@ export default function getMainColor(
     img.onload = function draw() {
       const imgXRadio = img.width / imgWidth;
       const imgYRadio = img.height / imgHeight;
-      const context = getContext(width, height);
+      const context = getContext(width * imgXRadio, height * imgXRadio);
       context.drawImage(
         img,
         Math.floor(xStart * imgXRadio),
@@ -78,7 +78,12 @@ export default function getMainColor(
         Math.floor(height * imgYRadio)
       );
 
-      const { data } = context.getImageData(0, 0, width, width);
+      const { data } = context.getImageData(
+        0,
+        0,
+        width * imgXRadio,
+        width * imgXRadio
+      );
       const count = getColorCount(data);
       resolve(count);
     };

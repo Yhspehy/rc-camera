@@ -31,7 +31,7 @@ class Camera extends React.Component {
     imgList: [],
     current: 0,
     slideOn: "random",
-    animateType: "random",
+    animateType: "curtainTopLeft",
     duration: 1000,
     easing: "cubic-bezier(0.77, 0, 0.175, 1)",
     /**

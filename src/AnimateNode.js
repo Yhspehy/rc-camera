@@ -147,13 +147,25 @@ export default class AnimateNode extends React.PureComponent {
                       height: el.height,
                       zIndex: 1001,
                       transition: `all ${duration}ms ${finalEasing}`,
-                      background: `${-el.left}px ${-el.top}px / ${width}px ${height}px  no-repeat url(${imgBg})`
+                      overflow: "hidden"
+                      // background: `${-el.left}px ${-el.top}px / ${width}px ${height}px  no-repeat url(${imgBg})`
                     },
                     ...el.transitionStyles[
                       slideOnTransitionHook[slideOn][state]
                     ]
                   }}
-                />
+                >
+                  <img
+                    src={imgBg}
+                    style={{
+                      width,
+                      height,
+                      marginTop: -el.top,
+                      marginLeft: -el.left
+                    }}
+                    alt=""
+                  />
+                </div>
               )}
             </Transition>
           ))}
