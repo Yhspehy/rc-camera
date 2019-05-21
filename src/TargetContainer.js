@@ -125,6 +125,7 @@ export default class TargetContainre extends React.PureComponent {
           isAnimate={isAnimate}
           contentBar={contentBar}
           current={current}
+          duration={duration}
           contentBarWrapStyle={contentBarWrapStyle}
         />
       </div>

@@ -9,6 +9,7 @@ export default class Content extends React.PureComponent {
     imgList: PropTypes.arrayOf(PropTypes.object),
     isAnimate: PropTypes.bool,
     current: PropTypes.number,
+    duration: PropTypes.number,
     contentBar: PropTypes.oneOfType([PropTypes.func, PropTypes.oneOf([null])]),
     contentBarWrapStyle: PropTypes.object
   };
@@ -35,6 +36,7 @@ export default class Content extends React.PureComponent {
       contentBar,
       imgList,
       current,
+      duration,
       contentBarWrapStyle
     } = this.props;
 
@@ -43,7 +45,15 @@ export default class Content extends React.PureComponent {
     return (
       <React.Fragment>
         {imgList[current].content ? (
-          <Transition in={!isAnimate} timeout={0} appear>
+          <Transition
+            in={!isAnimate}
+            timeout={{
+              appear: 0,
+              enter: 0,
+              exit: duration
+            }}
+            appear
+          >
             {state => (
               <div
                 className={`${prefixCls}-target-content-wrap`}

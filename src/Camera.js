@@ -25,7 +25,8 @@ class Camera extends React.PureComponent {
     nextBtn: PropTypes.oneOfType([PropTypes.node, PropTypes.oneOf([null])]),
     pagination: PropTypes.bool,
     autoPlay: PropTypes.bool,
-    autoPlayTime: PropTypes.number
+    autoPlayTime: PropTypes.number,
+    showThumbnail: PropTypes.bool
   };
   static defaultProps = {
     width: "100%",
@@ -34,7 +35,7 @@ class Camera extends React.PureComponent {
     imgList: [],
     current: 0,
     slideOn: "random",
-    animateType: "topLeftBottomRight",
+    animateType: "random",
     duration: 1000,
     easing: "cubic-bezier(0.77, 0, 0.175, 1)",
     /**
@@ -55,7 +56,8 @@ class Camera extends React.PureComponent {
     nextBtn: null,
     pagination: true,
     autoPlay: false,
-    autoPlayTime: 5000
+    autoPlayTime: 5000,
+    showThumbnail: true
   };
 
   constructor(props) {
@@ -110,7 +112,7 @@ class Camera extends React.PureComponent {
   getSlideOn = () => {
     if (this.props.animateType === "random") {
       this.setState({
-        slideOn: Math.random() > 0.5 ? "prev" : "next"
+        slideOn: Math.random() > 0.7 ? "prev" : "next"
       });
     }
   };
@@ -177,7 +179,8 @@ class Camera extends React.PureComponent {
       contentBarWrapStyle,
       prevBtn,
       nextBtn,
-      pagination
+      pagination,
+      showThumbnail
     } = this.props;
     const {
       current,
@@ -239,6 +242,7 @@ class Camera extends React.PureComponent {
                   current={current}
                   nextIndex={nextIndex}
                   handleClick={this.handleClick}
+                  showThumbnail={showThumbnail}
                 />
               )}
             </React.Fragment>

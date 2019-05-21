@@ -74,28 +74,28 @@ export function getAnimateFormat(type) {
     case "blindCurtainTopLeft":
     case "blindCurtainTopRight":
     case "blindCurtainSliceTop":
-      rows = 12;
+      rows = 8;
       cols = 1;
       break;
 
     case "blindCurtainBottomLeft":
     case "blindCurtainBottomRight":
     case "blindCurtainSliceBottom":
-      rows = 12;
+      rows = 8;
       cols = 1;
       reverse = true;
       break;
 
     case "mosaic":
       rows = 4;
-      cols = 6;
+      cols = 5;
       break;
 
     case "stampede":
     case "mosaicRandom":
     case "mosaicSpiral":
       rows = 4;
-      cols = 6;
+      cols = 5;
       special = true;
       break;
 
@@ -104,18 +104,18 @@ export function getAnimateFormat(type) {
     case "bottomLeftTopRight":
     case "topRightBottomLeft":
       rows = 4;
-      cols = 6;
+      cols = 5;
       break;
 
     case "mosaicReverse":
       rows = 4;
-      cols = 6;
+      cols = 5;
       reverse = true;
       break;
 
     case "mosaicSpiralReverse":
       rows = 4;
-      cols = 6;
+      cols = 5;
       special = true;
       reverse = true;
       break;
@@ -230,7 +230,7 @@ export function getTransitionStyles(type) {
       break;
 
     case "stampede":
-      delay = 0;
+      delay = 20;
       break;
 
     case "mosaic":
@@ -410,7 +410,7 @@ export function specialAnimate(type, blocks) {
             marginTop: 0,
             marginLeft: 0
           },
-          delay: 0
+          delay: 10 * idx
         };
       });
       easing = "ease-in-out";

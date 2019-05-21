@@ -185,7 +185,7 @@ export default class AnimateNode extends React.PureComponent {
               height
             }}
             src={imgList[nextIndex].img}
-            alt="default img"
+            alt="next img"
           />
         ) : null}
       </div>

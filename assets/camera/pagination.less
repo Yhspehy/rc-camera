@@ -20,10 +20,18 @@
     transition: all 0.5s;
     padding: 0;
     cursor: pointer;
+    position: relative;
   }
 
   &-current {
     width: 16px;
     background: red;
+  }
+
+  &-thumbnail {
+    position: absolute;
+    left: -44px;
+    bottom: 10px;
+    transition: opacity 0.5s;
   }
 }
