@@ -1,0 +1,64 @@
+.@{prefixCls} {
+  font-size: 12px;
+  font-family: 'Arial';
+  padding: 0;
+  position: relative;
+  max-width: 1000px;
+  margin: 0 auto;
+
+  // camera容器
+  &-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+
+
+  // camera target容器
+  &-target {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    overflow: hidden;
+
+    &-stage {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+    }
+
+    &-img {
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+
+    &-content-wrap {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      z-index: 1999;
+      background: rgba(0, 0, 0, 0.8);
+      color: #fff;
+      padding: 10px 20px 20px;
+      transition-property: opacity, transform;
+      transition-duration: 1s;
+      word-break: break-word;
+      font-size: 18px;
+      line-height: 26px;
+    }
+
+    // 当前选中的图片
+    &-current {
+      z-index: 99;
+    }
+  }
+}
