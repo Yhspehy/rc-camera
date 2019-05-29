@@ -56,7 +56,7 @@ export default class Pagination extends React.PureComponent {
             onMouseEnter={() => this.setI(idx)}
             onMouseLeave={this.setI}
           >
-            {showThumbnail ? (
+            {showThumbnail && el.thumb ? (
               <Transition
                 in={idx === i}
                 timeout={{

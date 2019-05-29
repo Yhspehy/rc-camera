@@ -11,7 +11,7 @@ let autoPlayTimeOut;
 class Camera extends React.PureComponent {
   static propTypes = {
     width: PropTypes.string,
-    aspectRadio: PropTypes.number,
+    aspectRatio: PropTypes.number,
     prefixCls: PropTypes.string,
     imgList: PropTypes.arrayOf(PropTypes.object),
     current: PropTypes.number,
@@ -30,7 +30,7 @@ class Camera extends React.PureComponent {
   };
   static defaultProps = {
     width: "100%",
-    aspectRadio: 0.5,
+    aspectRatio: 0.5,
     prefixCls: "rc-camera",
     imgList: [],
     current: 0,
@@ -94,7 +94,7 @@ class Camera extends React.PureComponent {
 
   getHeight = async () => {
     this.setState({
-      height: this.cameraRef.current.clientWidth * this.props.aspectRadio
+      height: this.cameraRef.current.clientWidth * this.props.aspectRatio
     });
   };
 
