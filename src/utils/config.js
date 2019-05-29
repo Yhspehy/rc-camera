@@ -25,7 +25,11 @@ const animateTypeList = [
   "bottomRightTopLeft",
   "bottomLeftTopRight",
   "topRightBottomLeft",
-  "stampede"
+  "stampede",
+  "rotateYLeft",
+  "rotateYRight",
+  "rotateXTop",
+  "rotateXBottom"
 ];
 
 export default animateTypeList;

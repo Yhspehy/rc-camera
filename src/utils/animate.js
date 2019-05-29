@@ -12,37 +12,144 @@ export default function getScrollStyle(type, width, height) {
 
   switch (type) {
     case "scrollTop":
-      prev.start = 0;
-      prev.final = -height;
-      next.start = height;
-      next.final = 0;
+      prev.start = {
+        top: 0
+      };
+      prev.final = {
+        top: -height
+      };
+      next.start = {
+        top: height
+      };
+      next.final = {
+        top: 0
+      };
       break;
 
     case "scrollRight":
-      prev.start = 0;
-      prev.final = width;
-      next.start = -width;
-      next.final = 0;
+      prev.start = {
+        left: 0
+      };
+      prev.final = {
+        left: width
+      };
+      next.start = {
+        left: -width
+      };
+      next.final = {
+        left: 0
+      };
       break;
 
     case "scrollBottom":
-      prev.start = 0;
-      prev.final = height;
-      next.start = -height;
-      next.final = 0;
+      prev.start = {
+        top: 0
+      };
+      prev.final = {
+        top: height
+      };
+      next.start = {
+        top: -height
+      };
+      next.final = {
+        top: 0
+      };
       break;
 
     case "scrollLeft":
-      prev.start = 0;
-      prev.final = -width;
-      next.start = width;
-      next.final = 0;
+      prev.start = {
+        left: 0
+      };
+      prev.final = {
+        left: -width
+      };
+      next.start = {
+        left: width
+      };
+      next.final = {
+        left: 0
+      };
+      break;
+
+    case "rotateYLeft":
+      prev.start = {
+        transformOrigin: "left center",
+        transform: "rotateY(-90deg)"
+      };
+      prev.final = {
+        transformOrigin: "left center"
+      };
+      next.start = {
+        transformOrigin: "right center"
+      };
+      next.final = {
+        transformOrigin: "right center",
+        transform: "rotateY(90deg)"
+      };
+      break;
+
+    case "rotateYRight":
+      prev.start = {
+        left: 0
+      };
+      prev.final = {
+        left: -width
+      };
+      next.start = {
+        left: width
+      };
+      next.final = {
+        left: 0
+      };
       break;
 
     default:
   }
 
   return {
+    prev,
+    next
+  };
+}
+
+export function getTransformStyle(type, width, height) {
+  const container = {
+    entering: {
+      transform: "rotateY(-90deg)"
+    },
+    entered: {}
+  };
+
+  let prev = { transform: `rotateY(90deg) translateZ(${width / 2}px)` };
+
+  let next = { transform: `translateZ(${width / 2}px)` };
+
+  switch (type) {
+    case "rotateYLeft":
+      break;
+
+    case "rotateYRight":
+      container.entering = { transform: "rotateY(90deg)" };
+      prev = { transform: `rotateY(-90deg) translateZ(${width / 2}px)` };
+      break;
+
+    case "rotateXTop":
+      container.entering = { transform: "rotateX(-90deg)" };
+      prev = { transform: `rotateX(90deg)  translateZ(${height / 2}px)` };
+      next = { transform: `translateZ(${height / 2}px)` };
+      break;
+
+    case "rotateXBottom":
+      container.entering = { transform: "rotateX(90deg)" };
+      prev = { transform: `rotateX(-90deg)  translateZ(${height / 2}px)` };
+      next = { transform: `translateZ(${height / 2}px)` };
+      break;
+
+    default:
+  }
+
+  return {
+    container,
     prev,
     next
   };
@@ -119,6 +226,7 @@ export function getAnimateFormat(type) {
       special = true;
       reverse = true;
       break;
+
     default:
   }
 

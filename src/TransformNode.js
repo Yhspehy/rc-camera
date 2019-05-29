@@ -2,9 +2,9 @@ import React from "react";
 
 import PropTypes from "prop-types";
 
-import { Transition, TransitionGroup } from "react-transition-group";
+import { Transition } from "react-transition-group";
 
-import getScrollStyle from "./utils/animate";
+import { getTransformStyle } from "./utils/animate";
 
 export default class AnimateNode extends React.PureComponent {
   static propTypes = {
@@ -34,58 +34,45 @@ export default class AnimateNode extends React.PureComponent {
       animateOver
     } = this.props;
 
-    const scrollStyle = getScrollStyle(animateType, width, height);
-
-    const transitionPrevStyles = {
-      entering: scrollStyle.prev.start,
-      entered: scrollStyle.prev.final
-    };
-
-    const transitionNextStyles = {
-      entering: scrollStyle.next.start,
-      entered: scrollStyle.next.final
-    };
+    const scrollStyle = getTransformStyle(animateType, width, height);
 
     animateOver();
 
     return (
-      <TransitionGroup className={`${prefixCls}-target-img-container`}>
-        <Transition appear in timeout={0}>
-          {state => (
+      <Transition appear in timeout={0}>
+        {state => (
+          <div
+            className={`${prefixCls}-target-stage`}
+            style={{
+              ...scrollStyle.container[state],
+              transformStyle: "preserve-3d",
+              transition: `all  ${duration}ms ${easing}`
+            }}
+          >
             <img
               className={`${prefixCls}-target-img`}
               src={imgList[current].img}
               style={{
-                ...transitionPrevStyles[state],
-                ...{
-                  width,
-                  height,
-                  transition: `all  ${duration}ms ${easing}`
-                }
+                width,
+                height,
+                ...scrollStyle.prev
               }}
               alt="prev img"
             />
-          )}
-        </Transition>
 
-        <Transition appear in timeout={0}>
-          {state => (
             <img
               className={`${prefixCls}-target-img`}
               src={imgList[nextIndex].img}
               style={{
-                ...transitionNextStyles[state],
-                ...{
-                  width,
-                  height,
-                  transition: `all  ${duration}ms ${easing}`
-                }
+                width,
+                height,
+                ...scrollStyle.next
               }}
               alt="next img"
             />
-          )}
-        </Transition>
-      </TransitionGroup>
+          </div>
+        )}
+      </Transition>
     );
   }
 }

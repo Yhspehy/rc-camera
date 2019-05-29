@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import ScrollNode from "./ScrollNode";
+import TransformNode from "./TransformNode";
 import AnimateNode from "./AnimateNode";
 import Content from "./Content";
 
@@ -67,6 +68,28 @@ export default class TargetContainre extends React.PureComponent {
       ) {
         animateContainer = (
           <ScrollNode
+            prefixCls={prefixCls}
+            width={width}
+            height={height}
+            imgList={imgList}
+            current={current}
+            nextIndex={nextIndex}
+            isAnimate={isAnimate}
+            animateOver={this.animateOver}
+            slideOn={slideOn}
+            animateType={animateType}
+            duration={duration}
+            easing={easing}
+          />
+        );
+      } else if (
+        animateType === "rotateYLeft" ||
+        animateType === "rotateYRight" ||
+        animateType === "rotateXTop" ||
+        animateType === "rotateXBottom"
+      ) {
+        animateContainer = (
+          <TransformNode
             prefixCls={prefixCls}
             width={width}
             height={height}
