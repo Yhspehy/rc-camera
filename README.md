@@ -16,6 +16,7 @@ Base on [Camera](https://github.com/pixedelic/Camera).
 
 ```jsx
 import Camera from "rc-camera";
+import "rc-camera/assets/index.css"
 
 const imgList = [{ img: "", content: "" }];
 
