@@ -6,11 +6,31 @@ React Camera Component.
 
 Base on [Camera](https://github.com/pixedelic/Camera).
 
+
+[![NPM version][npm-image]][npm-url]
+[![node version][node-image]][node-url]
+[![npm download][download-image]][download-url]
+
+[npm-image]: http://img.shields.io/npm/v/rc-camera.svg?style=flat-square
+[npm-url]: http://npmjs.org/package/rc-camera
+[node-image]: https://img.shields.io/badge/node.js-%3E=_0.10-green.svg?style=flat-square
+[node-url]: http://nodejs.org/download/
+[download-image]: https://img.shields.io/npm/dm/rc-camera.svg?style=flat-square
+[download-url]: https://npmjs.org/package/rc-camera
+
+
 ## Feature
 
 - support ie8,ie8+,chrome,firefox,safari(basic usage)
 
 - support edge,chrome,firefox,safari,opera(some transform animations)
+
+
+
+## install
+
+[![rc-camera](https://nodei.co/npm/rc-camera.png)](https://npmjs.org/package/rc-camera)
+
 
 ## Usage
 

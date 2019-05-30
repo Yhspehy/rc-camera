@@ -4,9 +4,13 @@ import PropTypes from "prop-types";
 import TargetContainer from "./TargetContainer";
 import ButtonContainer from "./ButtonContainer";
 import Pagination from "./Pagination";
-import animateTypeList from "./utils/config";
+import animateTypeList, {CSS3Animation} from "./utils/config";
 
 let autoPlayTimeOut;
+
+const animationList = document.documentElement.style.transform ? animateTypeList : [...animateTypeList, ...CSS3Animation]
+
+const animationNum = animationList.length
 
 class Camera extends React.PureComponent {
   static propTypes = {
@@ -100,9 +104,8 @@ class Camera extends React.PureComponent {
 
   getAnimateType = () => {
     if (this.props.animateType === "random") {
-      const length = animateTypeList.length;
-      const randomIndex = Math.floor(Math.random() * length);
-      const animateType = animateTypeList[randomIndex];
+      const randomIndex = Math.floor(Math.random() * animationNum);
+      const animateType = animationList[randomIndex];
       this.setState({
         animateType
       });
