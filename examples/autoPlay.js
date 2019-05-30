@@ -41,14 +41,11 @@ function App() {
     }
   ];
 
-
-
   function contentBar (content) {
     return <div style={{color: 'red'}}>{content}</div>
   }
 
-
-  return <Camera imgList={imgList} contentBar={contentBar}   />;
+  return <Camera imgList={imgList}  contentBar={contentBar}  autoPlay  />;
 }
 
 ReactDOM.render(<App />, document.getElementById("__react-content"));

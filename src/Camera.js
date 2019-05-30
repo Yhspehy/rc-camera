@@ -23,14 +23,16 @@ class Camera extends React.PureComponent {
     animateType: PropTypes.string,
     duration: PropTypes.number,
     easing: PropTypes.string,
-    contentBar: PropTypes.oneOfType([PropTypes.func, PropTypes.oneOf([null])]),
+    contentBar: PropTypes.func,
     contentBarWrapStyle: PropTypes.object,
-    prevBtn: PropTypes.oneOfType([PropTypes.node, PropTypes.oneOf([null])]),
-    nextBtn: PropTypes.oneOfType([PropTypes.node, PropTypes.oneOf([null])]),
+    prevBtn: PropTypes.node,
+    nextBtn: PropTypes.node,
     pagination: PropTypes.bool,
     autoPlay: PropTypes.bool,
     autoPlayTime: PropTypes.number,
-    showThumbnail: PropTypes.bool
+    showThumbnail: PropTypes.bool,
+    onChange: PropTypes.func,
+    onAnimationOver: PropTypes.func
   };
   static defaultProps = {
     width: "100%",
@@ -42,26 +44,11 @@ class Camera extends React.PureComponent {
     animateType: "random",
     duration: 1000,
     easing: "cubic-bezier(0.77, 0, 0.175, 1)",
-    /**
-     * 自定义contentBar
-     * 默认会传入当前的内容
-     *
-     * @param {content} 当前的内容
-     *
-     * @example
-     *
-     * content => (
-     *  <div style={{ color: "red" }}>{content}</div>
-     * )
-     */
-    contentBar: content => <div style={{ color: "red" }}>{content}</div>,
     contentBarWrapStyle: {},
-    prevBtn: null,
-    nextBtn: null,
     pagination: true,
     autoPlay: false,
     autoPlayTime: 5000,
-    showThumbnail: true
+    showThumbnail: true,
   };
 
   constructor(props) {
@@ -143,14 +130,18 @@ class Camera extends React.PureComponent {
     });
   };
 
-  // 按钮点击事件
+  // Each action to next img(include click and autoPlay)
   handleClick = (next, isAuto = false) => {
-    const { isAnimate } = this.state;
+    const { isAnimate, current } = this.state;
+    const {onChange} = this.props
     if (isAnimate) {
       return;
     }
-    if (!isAuto) {
+    if (!isAuto && autoPlayTimeOut) {
       clearTimeout(autoPlayTimeOut);
+    }
+    if (onChange) {
+      onChange(current, next, isAuto)
     }
     this.getAnimateType();
     this.getSlideOn();
@@ -160,14 +151,20 @@ class Camera extends React.PureComponent {
     });
   };
 
-  // 动画执行完毕
-  handleAnimate = (c, a) => {
+  // handle animation when it's over
+  handleAnimate = (current, isAnimate) => {
+    const {onAnimationOver} = this.props
     this.setState(
       {
-        current: c,
-        isAnimate: !!a
+        current,
+        isAnimate: !!isAnimate
       },
-      () => this.setAutoPlay()
+      () => {
+        if (onAnimationOver) {
+          onAnimationOver(current)
+        }
+        this.setAutoPlay()
+      }
     );
   };
 

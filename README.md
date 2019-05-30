@@ -159,6 +159,18 @@ ReactDOM.render(<Camera imgList={imgList} />, mountNode);
         <td>true</td>
         <td>Whether to show thumbnail when hover the pagination. </td>
       </tr>
+      <tr>
+        <td>onChange</td>
+        <td>Function(current, nextIndex, isAuto)</td>
+        <td></td>
+        <td>Callback executed when slide to next img. </td>
+      </tr>
+      <tr>
+        <td>onAnimationOver</td>
+        <td>Function(current)</td>
+        <td></td>
+        <td>Callback executed when the animation is over. </td>
+      </tr>
     </tbody>
 </table>
 
