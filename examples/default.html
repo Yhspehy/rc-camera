@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>default.js - example - rc-camera@1.0.2</title>
+  <title>default.js - example - rc-camera@1.0.3</title>
   <meta name="viewport"
         content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
   <meta charset="utf-8"/>
@@ -263,7 +263,7 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 <body>
   <div class="container">
     <div class="header">
-      <h1>rc-camera@1.0.2</h1>
+      <h1>rc-camera@1.0.3</h1>
 
       <p>Img Slide for react</p>
     </div>
@@ -273,6 +273,10 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 <span class="hljs-keyword">import</span> ReactDOM <span class="hljs-keyword">from</span> <span class="hljs-string">"react-dom/client"</span>;
 <span class="hljs-keyword">import</span> Camera <span class="hljs-keyword">from</span> <span class="hljs-string">"rc-camera"</span>;
 <span class="hljs-keyword">import</span> <span class="hljs-string">"rc-camera/assets/index.css"</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">contentBar</span>(<span class="hljs-params">content</span>) </span>{
+  <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">{{</span> <span class="hljs-attribute">color:</span> "<span class="hljs-attribute">red</span>" }}&gt;</span>{content}<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>;</span>
+}
 
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">App</span>(<span class="hljs-params"></span>) </span>{
   <span class="hljs-keyword">const</span> imgList = [
@@ -311,10 +315,6 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
         <span class="hljs-string">"这是一大段中文，发现中文竟然可以自动换行这是一大段中文，发现中文竟然可以自动换行这是一大段中文，发现中文竟然可以自动换行这是一大段中文，发现中文竟然可以自动换行"</span>
     }
   ];
-
-  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">contentBar</span>(<span class="hljs-params">content</span>) </span>{
-    <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">{{</span> <span class="hljs-attribute">color:</span> "<span class="hljs-attribute">red</span>" }}&gt;</span>{content}<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>;</span>
-  }
 
   <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">Camera</span> <span class="hljs-attribute">imgList</span>=<span class="hljs-value">{imgList}</span> <span class="hljs-attribute">contentBar</span>=<span class="hljs-value">{contentBar}</span> /&gt;</span>;</span>
 }

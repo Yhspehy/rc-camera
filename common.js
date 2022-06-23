@@ -37677,6 +37677,7 @@ var ButtonContainer = /*#__PURE__*/function (_React$PureComponent) {
       var _this$props3 = _this.props,
           prefixCls = _this$props3.prefixCls,
           prevBtn = _this$props3.prevBtn;
+      var prevBtnColor = _this.state.prevBtnColor;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "".concat(prefixCls, "-button-wrap")
       }, prevBtn ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -37693,7 +37694,7 @@ var ButtonContainer = /*#__PURE__*/function (_React$PureComponent) {
         viewBox: "0 0 256 512",
         className: "".concat(prefixCls, "-button")
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
-        fill: _this.state.prevBtnColor,
+        fill: prevBtnColor,
         d: "M31.7 239l136-136c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9L127.9 256l96.4 96.4c9.4 9.4 9.4 24.6 0 33.9L201.7 409c-9.4 9.4-24.6 9.4-33.9 0l-136-136c-9.5-9.4-9.5-24.6-.1-34z"
       })));
     });
@@ -37702,6 +37703,7 @@ var ButtonContainer = /*#__PURE__*/function (_React$PureComponent) {
       var _this$props4 = _this.props,
           prefixCls = _this$props4.prefixCls,
           nextBtn = _this$props4.nextBtn;
+      var nextBtnColor = _this.state.nextBtnColor;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "".concat(prefixCls, "-button-wrap")
       }, nextBtn ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -37718,7 +37720,7 @@ var ButtonContainer = /*#__PURE__*/function (_React$PureComponent) {
         viewBox: "0 0 256 512",
         className: "".concat(prefixCls, "-button")
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
-        fill: _this.state.nextBtnColor,
+        fill: nextBtnColor,
         d: "M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"
       })));
     });
@@ -37729,13 +37731,17 @@ var ButtonContainer = /*#__PURE__*/function (_React$PureComponent) {
   _createClass(ButtonContainer, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this._getMainColor(this.props.current);
+      var current = this.props.current;
+
+      this._getMainColor(current);
     }
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
-      if (prevProps.current !== this.props.current) {
-        this._getMainColor(this.props.current);
+      var current = this.props.current;
+
+      if (prevProps.current !== current) {
+        this._getMainColor(current);
       }
     }
   }, {
@@ -37851,15 +37857,18 @@ var Camera = /*#__PURE__*/function (_React$PureComponent) {
     _this = _super.call(this, props);
 
     _defineProperty(_assertThisInitialized(_this), "getHeight", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+      var aspectRatio;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
+              aspectRatio = _this.props.aspectRatio;
+
               _this.setState({
-                height: _this.cameraRef.current.clientWidth * _this.props.aspectRatio
+                height: _this.cameraRef.current.clientWidth * aspectRatio
               });
 
-            case 1:
+            case 2:
             case "end":
               return _context.stop();
           }
@@ -37868,18 +37877,22 @@ var Camera = /*#__PURE__*/function (_React$PureComponent) {
     })));
 
     _defineProperty(_assertThisInitialized(_this), "getAnimateType", function () {
-      if (_this.props.animateType === "random") {
+      var animateType = _this.props.animateType;
+
+      if (animateType === "random") {
         var randomIndex = Math.floor(Math.random() * animationNum);
-        var animateType = animationList[randomIndex];
+        var _animateType = animationList[randomIndex];
 
         _this.setState({
-          animateType: animateType
+          animateType: _animateType
         });
       }
     });
 
     _defineProperty(_assertThisInitialized(_this), "getSlideOn", function () {
-      if (_this.props.animateType === "random") {
+      var animateType = _this.props.animateType;
+
+      if (animateType === "random") {
         _this.setState({
           slideOn: Math.random() > 0.7 ? "prev" : "next"
         });
@@ -37965,7 +37978,7 @@ var Camera = /*#__PURE__*/function (_React$PureComponent) {
       _current = 0;
     }
 
-    var _animateType = props.animateType === "random" ? "scrollTop" : props.animateType;
+    var _animateType2 = props.animateType === "random" ? "scrollTop" : props.animateType;
 
     var slideOn = props.slideOn === "random" ? "next" : props.slideOn;
     _this.cameraRef = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
@@ -37975,7 +37988,7 @@ var Camera = /*#__PURE__*/function (_React$PureComponent) {
       isAnimate: false,
       height: 0,
       isHover: false,
-      animateType: _animateType,
+      animateType: _animateType2,
       slideOn: slideOn
     };
     return _this;
@@ -38599,9 +38612,13 @@ var TargetContainre = /*#__PURE__*/function (_React$PureComponent) {
 
     _defineProperty(_assertThisInitialized(_this), "animateOver", function () {
       var delay = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+      var _this$props = _this.props,
+          nextIndex = _this$props.nextIndex,
+          duration = _this$props.duration,
+          handleAnimate = _this$props.handleAnimate;
       setTimeout(function () {
-        _this.props.handleAnimate(_this.props.nextIndex, false);
-      }, _this.props.duration + delay);
+        handleAnimate(nextIndex, false);
+      }, duration + delay);
     });
 
     return _this;
@@ -38610,20 +38627,20 @@ var TargetContainre = /*#__PURE__*/function (_React$PureComponent) {
   _createClass(TargetContainre, [{
     key: "render",
     value: function render() {
-      var _this$props = this.props,
-          prefixCls = _this$props.prefixCls,
-          height = _this$props.height,
-          width = _this$props.width,
-          imgList = _this$props.imgList,
-          current = _this$props.current,
-          duration = _this$props.duration,
-          easing = _this$props.easing,
-          isAnimate = _this$props.isAnimate,
-          slideOn = _this$props.slideOn,
-          nextIndex = _this$props.nextIndex,
-          animateType = _this$props.animateType,
-          contentBar = _this$props.contentBar,
-          contentBarWrapStyle = _this$props.contentBarWrapStyle;
+      var _this$props2 = this.props,
+          prefixCls = _this$props2.prefixCls,
+          height = _this$props2.height,
+          width = _this$props2.width,
+          imgList = _this$props2.imgList,
+          current = _this$props2.current,
+          duration = _this$props2.duration,
+          easing = _this$props2.easing,
+          isAnimate = _this$props2.isAnimate,
+          slideOn = _this$props2.slideOn,
+          nextIndex = _this$props2.nextIndex,
+          animateType = _this$props2.animateType,
+          contentBar = _this$props2.contentBar,
+          contentBarWrapStyle = _this$props2.contentBarWrapStyle;
       var animateContainer = null; // 触发点击之后
 
       if (isAnimate) {

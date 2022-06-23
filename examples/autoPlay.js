@@ -176,6 +176,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+function contentBar(content) {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    style: {
+      color: "red"
+    }
+  }, content);
+}
+
 function App() {
   var imgList = [{
     thumb: "../assets/images/slides/thumbs/bridge.jpg",
@@ -201,15 +209,6 @@ function App() {
     img: "../assets/images/slides/shelter.jpg",
     content: "这是一大段中文，发现中文竟然可以自动换行这是一大段中文，发现中文竟然可以自动换行这是一大段中文，发现中文竟然可以自动换行这是一大段中文，发现中文竟然可以自动换行"
   }];
-
-  function contentBar(content) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      style: {
-        color: "red"
-      }
-    }, content);
-  }
-
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(rc_camera__WEBPACK_IMPORTED_MODULE_2__["default"], {
     imgList: imgList,
     contentBar: contentBar,
