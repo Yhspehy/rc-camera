@@ -37321,7 +37321,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_transition_group__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-transition-group */ "./node_modules/.pnpm/react-transition-group@4.4.2_react-dom@18.2.0+react@18.2.0/node_modules/react-transition-group/esm/index.js");
 /* harmony import */ var _utils_animate__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./utils/animate */ "./src/utils/animate.js");
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? Object(arguments[i]) : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys.push.apply(ownKeys, Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -37457,7 +37459,7 @@ var AnimateNode = /*#__PURE__*/function (_React$PureComponent) {
           top: topWidth,
           left: leftWidth
         };
-        blocks.push(_objectSpread({}, baseElObj, {
+        blocks.push(_objectSpread(_objectSpread({}, baseElObj), {
           transitionStyles: transitonStyleFn && transitonStyleFn(baseElObj)
         }));
 
@@ -37492,7 +37494,7 @@ var AnimateNode = /*#__PURE__*/function (_React$PureComponent) {
           timeout: el.transitionStyles.delay
         }, function (state) {
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            style: _objectSpread({}, {
+            style: _objectSpread(_objectSpread({}, {
               position: "absolute",
               top: el.top,
               left: el.left,
@@ -37502,7 +37504,7 @@ var AnimateNode = /*#__PURE__*/function (_React$PureComponent) {
               transition: "all ".concat(duration, "ms ").concat(finalEasing),
               overflow: "hidden" // background: `${-el.left}px ${-el.top}px / ${width}px ${height}px  no-repeat url(${imgBg})`
 
-            }, el.transitionStyles[slideOnTransitionHook[slideOn][state]])
+            }), el.transitionStyles[slideOnTransitionHook[slideOn][state]])
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
             src: imgBg,
             style: {
@@ -37981,7 +37983,7 @@ var Camera = /*#__PURE__*/function (_React$PureComponent) {
     var _animateType2 = props.animateType === "random" ? "scrollTop" : props.animateType;
 
     var slideOn = props.slideOn === "random" ? "next" : props.slideOn;
-    _this.cameraRef = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
+    _this.cameraRef = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
     _this.state = {
       current: _current,
       nextIndex: 0,
@@ -38131,7 +38133,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/.pnpm/prop-types@15.8.1/node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_transition_group__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-transition-group */ "./node_modules/.pnpm/react-transition-group@4.4.2_react-dom@18.2.0+react@18.2.0/node_modules/react-transition-group/esm/index.js");
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? Object(arguments[i]) : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys.push.apply(ownKeys, Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -38232,7 +38236,7 @@ var Content = /*#__PURE__*/function (_React$PureComponent) {
       }, function (state) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "".concat(prefixCls, "-target-content-wrap"),
-          style: _objectSpread({}, contentTransition[state], contentBarWrapStyle)
+          style: _objectSpread(_objectSpread({}, contentTransition[state]), contentBarWrapStyle)
         }, contentBar ? _this2.renderContentBarNode() : imgList[current].content);
       }) : null);
     }
@@ -38427,7 +38431,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_transition_group__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-transition-group */ "./node_modules/.pnpm/react-transition-group@4.4.2_react-dom@18.2.0+react@18.2.0/node_modules/react-transition-group/esm/index.js");
 /* harmony import */ var _utils_animate__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./utils/animate */ "./src/utils/animate.js");
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? Object(arguments[i]) : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys.push.apply(ownKeys, Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -38501,7 +38507,7 @@ var AnimateNode = /*#__PURE__*/function (_React$PureComponent) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
           className: "".concat(prefixCls, "-target-img"),
           src: imgList[current].img,
-          style: _objectSpread({}, transitionPrevStyles[state], {
+          style: _objectSpread(_objectSpread({}, transitionPrevStyles[state]), {
             width: width,
             height: height,
             transition: "all  ".concat(duration, "ms ").concat(easing)
@@ -38516,7 +38522,7 @@ var AnimateNode = /*#__PURE__*/function (_React$PureComponent) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
           className: "".concat(prefixCls, "-target-img"),
           src: imgList[nextIndex].img,
-          style: _objectSpread({}, transitionNextStyles[state], {
+          style: _objectSpread(_objectSpread({}, transitionNextStyles[state]), {
             width: width,
             height: height,
             transition: "all  ".concat(duration, "ms ").concat(easing)
@@ -38758,7 +38764,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_transition_group__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-transition-group */ "./node_modules/.pnpm/react-transition-group@4.4.2_react-dom@18.2.0+react@18.2.0/node_modules/react-transition-group/esm/index.js");
 /* harmony import */ var _utils_animate__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./utils/animate */ "./src/utils/animate.js");
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? Object(arguments[i]) : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys.push.apply(ownKeys, Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -38821,7 +38829,7 @@ var AnimateNode = /*#__PURE__*/function (_React$PureComponent) {
       }, function (state) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "".concat(prefixCls, "-target-stage"),
-          style: _objectSpread({}, scrollStyle.container[state], {
+          style: _objectSpread(_objectSpread({}, scrollStyle.container[state]), {}, {
             transformStyle: "preserve-3d",
             transition: "all  ".concat(duration, "ms ").concat(easing)
           })

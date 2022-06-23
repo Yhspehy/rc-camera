@@ -186,27 +186,27 @@ function contentBar(content) {
 
 function App() {
   var imgList = [{
-    thumb: "./images/slides/thumbs/bridge.jpg",
-    img: "./images/slides/bridge.jpg",
+    thumb: "../assets/images/slides/thumbs/bridge.jpg",
+    img: "../assets/images/slides/bridge.jpg",
     content: "这是一大段中文，发现中文竟然可以自动换行这是一大段中文，发现中文竟然可以自动换行这是一大段中文，发现中文竟然可以自动换行这是一大段中文，发现中文竟然可以自动换行"
   }, {
-    thumb: "./images/slides/thumbs/sea.jpg",
-    img: "./images/slides/sea.jpg"
+    thumb: "../assets/images/slides/thumbs/sea.jpg",
+    img: "../assets/images/slides/sea.jpg"
   }, {
-    thumb: "./images/slides/thumbs/leaf.jpg",
-    img: "./images/slides/leaf.jpg",
+    thumb: "../assets/images/slides/thumbs/leaf.jpg",
+    img: "../assets/images/slides/leaf.jpg",
     content: "这是一大段中文，发现中文竟然可以自动换行这是一大段中文，发现中文竟然可以自动换行这是一大段中文，发现中文竟然可以自动换行这是一大段中文，发现中文竟然可以自动换行"
   }, {
-    thumb: "./images/slides/thumbs/road.jpg",
-    img: "./images/slides/road.jpg",
+    thumb: "../assets/images/slides/thumbs/road.jpg",
+    img: "../assets/images/slides/road.jpg",
     content: "这是一大段中文，发现中文竟然可以自动换行这是一大段中文，发现中文竟然可以自动换行这是一大段中文，发现中文竟然可以自动换行这是一大段中文，发现中文竟然可以自动换行"
   }, {
-    thumb: "./images/slides/thumbs/tree.jpg",
-    img: "./images/slides/tree.jpg",
+    thumb: "../assets/images/slides/thumbs/tree.jpg",
+    img: "../assets/images/slides/tree.jpg",
     content: "这是一大段中文，发现中文竟然可以自动换行这是一大段中文，发现中文竟然可以自动换行这是一大段中文，发现中文竟然可以自动换行这是一大段中文，发现中文竟然可以自动换行"
   }, {
-    thumb: "./images/slides/thumbs/shelter.jpg",
-    img: "./images/slides/shelter.jpg",
+    thumb: "../assets/images/slides/thumbs/shelter.jpg",
+    img: "../assets/images/slides/shelter.jpg",
     content: "这是一大段中文，发现中文竟然可以自动换行这是一大段中文，发现中文竟然可以自动换行这是一大段中文，发现中文竟然可以自动换行这是一大段中文，发现中文竟然可以自动换行"
   }];
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(rc_camera__WEBPACK_IMPORTED_MODULE_2__["default"], {
