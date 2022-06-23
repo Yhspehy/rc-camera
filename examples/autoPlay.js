@@ -57,7 +57,7 @@
 /******/ 	// undefined = chunk not loaded, null = chunk preloaded/prefetched
 /******/ 	// Promise = chunk loading, 0 = chunk loaded
 /******/ 	var installedChunks = {
-/******/ 		"examples/default": 0
+/******/ 		"examples/autoPlay": 0
 /******/ 	};
 /******/
 /******/ 	var deferredModules = [];
@@ -148,17 +148,17 @@
 /******/
 /******/
 /******/ 	// add entry module to deferred list
-/******/ 	deferredModules.push([1,"common"]);
+/******/ 	deferredModules.push([0,"common"]);
 /******/ 	// run deferred modules when ready
 /******/ 	return checkDeferredModules();
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./examples/default.js":
-/*!*****************************!*\
-  !*** ./examples/default.js ***!
-  \*****************************/
+/***/ "./examples/autoPlay.js":
+/*!******************************!*\
+  !*** ./examples/autoPlay.js ***!
+  \******************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -212,7 +212,8 @@ function App() {
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(rc_camera__WEBPACK_IMPORTED_MODULE_2__["default"], {
     imgList: imgList,
-    contentBar: contentBar
+    contentBar: contentBar,
+    autoPlay: true
   });
 }
 
@@ -221,17 +222,17 @@ root.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createEle
 
 /***/ }),
 
-/***/ 1:
-/*!***********************************!*\
-  !*** multi ./examples/default.js ***!
-  \***********************************/
+/***/ 0:
+/*!************************************!*\
+  !*** multi ./examples/autoPlay.js ***!
+  \************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! ./examples/default.js */"./examples/default.js");
+module.exports = __webpack_require__(/*! ./examples/autoPlay.js */"./examples/autoPlay.js");
 
 
 /***/ })
 
 /******/ });
-//# sourceMappingURL=default.js.map
+//# sourceMappingURL=autoPlay.js.map
