@@ -32,7 +32,6 @@
         "./src/index.js"
       ]
     }
-
   },
   "scripts": {
     "dist": "rc-tools run dist",
@@ -51,19 +50,19 @@
     "now-build": "npm run build"
   },
   "devDependencies": {
-    "core-js": "^3.0.0",
-    "expect.js": "0.3.x",
-    "pre-commit": "1.x",
+    "core-js": "^3.23.2",
+    "expect.js": "0.3.1",
+    "pre-commit": "~1.2.2",
     "rc-test": "^6.0.9",
-    "rc-tools": "^8.x",
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0"
+    "rc-tools": "^9.6.1-alpha.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "dependencies": {
     "babel-runtime": "^6.26.0",
-    "classnames": "^2.2.6",
-    "prop-types": "^15.7.2",
-    "react-transition-group": "^4.0.1"
+    "classnames": "^2.3.1",
+    "prop-types": "^15.8.1",
+    "react-transition-group": "^4.4.2"
   },
   "pre-commit": [
     "lint"

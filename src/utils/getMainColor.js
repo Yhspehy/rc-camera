@@ -29,7 +29,7 @@ function getColorCount(data) {
       const rgbComponents = Array.from(data.subarray(i, i + 3));
 
       if (rgbComponents.indexOf(undefined) === -1) {
-        const color: string =
+        const color =
           alpha && alpha !== 255
             ? `${[...rgbComponents, alpha].join(",")})`
             : rgbComponents.join(",");
@@ -44,7 +44,7 @@ function getColorCount(data) {
   }
 
   const counts = Object.values(countMap);
-  return counts.sort((a: any, b: any) => b.count - a.count);
+  return counts.sort((a, b) => b.count - a.count);
 }
 
 export default function getMainColor(

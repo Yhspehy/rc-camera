@@ -24,19 +24,11 @@ export default class TargetContainre extends React.PureComponent {
     contentBarWrapStyle: PropTypes.object
   };
 
-  // shouldComponentUpdate(nextProps) {
-  //   const { isAnimate, current, nextIndex } = this.props;
-
-  //   if (current !== nextProps.nextIndex && nextProps.isAnimate) {
-  //     return true;
-  //   }
-  //   return false;
-  // }
-
   animateOver = (delay = 0) => {
+    const { nextIndex, duration, handleAnimate } = this.props;
     setTimeout(() => {
-      this.props.handleAnimate(this.props.nextIndex, false);
-    }, this.props.duration + delay);
+      handleAnimate(nextIndex, false);
+    }, duration + delay);
   };
 
   render() {

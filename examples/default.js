@@ -1,7 +1,11 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import ReactDOM from "react-dom/client";
 import Camera from "rc-camera";
 import "rc-camera/assets/index.less";
+
+function contentBar(content) {
+  return <div style={{ color: "red" }}>{content}</div>;
+}
 
 function App() {
   const imgList = [
@@ -41,14 +45,8 @@ function App() {
     }
   ];
 
-
-
-  function contentBar (content) {
-    return <div style={{color: 'red'}}>{content}</div>
-  }
-
-
-  return <Camera imgList={imgList} contentBar={contentBar}   />;
+  return <Camera imgList={imgList} contentBar={contentBar} />;
 }
 
-ReactDOM.render(<App />, document.getElementById("__react-content"));
+const root = ReactDOM.createRoot(document.getElementById("__react-content"));
+root.render(<App />);

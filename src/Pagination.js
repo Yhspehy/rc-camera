@@ -32,8 +32,7 @@ export default class Pagination extends React.PureComponent {
       nextIndex,
       showThumbnail
     } = this.props;
-
-    const i = this.state.i;
+    const { i } = this.state;
 
     const index = current === nextIndex ? current : nextIndex;
 

@@ -4,13 +4,13 @@ import PropTypes from "prop-types";
 import TargetContainer from "./TargetContainer";
 import ButtonContainer from "./ButtonContainer";
 import Pagination from "./Pagination";
-import animateTypeList, {CSS3Animation} from "./utils/config";
+import animateTypeList, { CSS3Animation } from "./utils/config";
 
 let autoPlayTimeOut;
 
-const animationList = document.documentElement.style.transform ? animateTypeList : [...animateTypeList, ...CSS3Animation]
+const animationList = [...animateTypeList, ...CSS3Animation];
 
-const animationNum = animationList.length
+const animationNum = animationList.length;
 
 class Camera extends React.PureComponent {
   static propTypes = {
@@ -34,6 +34,7 @@ class Camera extends React.PureComponent {
     onChange: PropTypes.func,
     onAnimationOver: PropTypes.func
   };
+
   static defaultProps = {
     width: "100%",
     aspectRatio: 0.5,
@@ -48,7 +49,7 @@ class Camera extends React.PureComponent {
     pagination: true,
     autoPlay: false,
     autoPlayTime: 5000,
-    showThumbnail: true,
+    showThumbnail: true
   };
 
   constructor(props) {
@@ -84,23 +85,27 @@ class Camera extends React.PureComponent {
   }
 
   getHeight = async () => {
+    const { aspectRatio } = this.props;
     this.setState({
-      height: this.cameraRef.current.clientWidth * this.props.aspectRatio
+      height: this.cameraRef.current.clientWidth * aspectRatio
     });
   };
 
   getAnimateType = () => {
-    if (this.props.animateType === "random") {
+    const { animateType } = this.props;
+    if (animateType === "random") {
       const randomIndex = Math.floor(Math.random() * animationNum);
-      const animateType = animationList[randomIndex];
+      const _animateType = animationList[randomIndex];
       this.setState({
-        animateType
+        animateType: _animateType
       });
     }
   };
 
   getSlideOn = () => {
-    if (this.props.animateType === "random") {
+    const { animateType } = this.props;
+
+    if (animateType === "random") {
       this.setState({
         slideOn: Math.random() > 0.7 ? "prev" : "next"
       });
@@ -133,7 +138,7 @@ class Camera extends React.PureComponent {
   // Each action to next img(include click and autoPlay)
   handleClick = (next, isAuto = false) => {
     const { isAnimate, current } = this.state;
-    const {onChange} = this.props
+    const { onChange } = this.props;
     if (isAnimate) {
       return;
     }
@@ -141,7 +146,7 @@ class Camera extends React.PureComponent {
       clearTimeout(autoPlayTimeOut);
     }
     if (onChange) {
-      onChange(current, next, isAuto)
+      onChange(current, next, isAuto);
     }
     this.getAnimateType();
     this.getSlideOn();
@@ -153,7 +158,7 @@ class Camera extends React.PureComponent {
 
   // handle animation when it's over
   handleAnimate = (current, isAnimate) => {
-    const {onAnimationOver} = this.props
+    const { onAnimationOver } = this.props;
     this.setState(
       {
         current,
@@ -161,9 +166,9 @@ class Camera extends React.PureComponent {
       },
       () => {
         if (onAnimationOver) {
-          onAnimationOver(current)
+          onAnimationOver(current);
         }
-        this.setAutoPlay()
+        this.setAutoPlay();
       }
     );
   };
