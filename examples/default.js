@@ -155,17 +155,6 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "./assets/images/slides/bridge.jpg":
-/*!*****************************************!*\
-  !*** ./assets/images/slides/bridge.jpg ***!
-  \*****************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "c3e23ff0e61c307dee536b1896b576ce.jpg";
-
-/***/ }),
-
 /***/ "./examples/default.js":
 /*!*****************************!*\
   !*** ./examples/default.js ***!
@@ -182,9 +171,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var rc_camera__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rc-camera */ "./index.js");
 /* harmony import */ var rc_camera_assets_index_less__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rc-camera/assets/index.less */ "./assets/index.less");
 /* harmony import */ var rc_camera_assets_index_less__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(rc_camera_assets_index_less__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _assets_images_slides_bridge_jpg__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../assets/images/slides/bridge.jpg */ "./assets/images/slides/bridge.jpg");
-/* harmony import */ var _assets_images_slides_bridge_jpg__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_assets_images_slides_bridge_jpg__WEBPACK_IMPORTED_MODULE_4__);
-
 
 
 
@@ -200,27 +186,27 @@ function contentBar(content) {
 
 function App() {
   var imgList = [{
-    thumb: "../assets/images/slides/thumbs/bridge.jpg",
-    img: _assets_images_slides_bridge_jpg__WEBPACK_IMPORTED_MODULE_4___default.a,
+    thumb: "./images/slides/thumbs/bridge.jpg",
+    img: "./images/slides/bridge.jpg",
     content: "这是一大段中文，发现中文竟然可以自动换行这是一大段中文，发现中文竟然可以自动换行这是一大段中文，发现中文竟然可以自动换行这是一大段中文，发现中文竟然可以自动换行"
   }, {
-    thumb: "../assets/images/slides/thumbs/sea.jpg",
-    img: "../assets/images/slides/sea.jpg"
+    thumb: "./images/slides/thumbs/sea.jpg",
+    img: "./images/slides/sea.jpg"
   }, {
-    thumb: "../assets/images/slides/thumbs/leaf.jpg",
-    img: "../assets/images/slides/leaf.jpg",
+    thumb: "./images/slides/thumbs/leaf.jpg",
+    img: "./images/slides/leaf.jpg",
     content: "这是一大段中文，发现中文竟然可以自动换行这是一大段中文，发现中文竟然可以自动换行这是一大段中文，发现中文竟然可以自动换行这是一大段中文，发现中文竟然可以自动换行"
   }, {
-    thumb: "../assets/images/slides/thumbs/road.jpg",
-    img: "../assets/images/slides/road.jpg",
+    thumb: "./images/slides/thumbs/road.jpg",
+    img: "./images/slides/road.jpg",
     content: "这是一大段中文，发现中文竟然可以自动换行这是一大段中文，发现中文竟然可以自动换行这是一大段中文，发现中文竟然可以自动换行这是一大段中文，发现中文竟然可以自动换行"
   }, {
-    thumb: "../assets/images/slides/thumbs/tree.jpg",
-    img: "../assets/images/slides/tree.jpg",
+    thumb: "./images/slides/thumbs/tree.jpg",
+    img: "./images/slides/tree.jpg",
     content: "这是一大段中文，发现中文竟然可以自动换行这是一大段中文，发现中文竟然可以自动换行这是一大段中文，发现中文竟然可以自动换行这是一大段中文，发现中文竟然可以自动换行"
   }, {
-    thumb: "../assets/images/slides/thumbs/shelter.jpg",
-    img: "../assets/images/slides/shelter.jpg",
+    thumb: "./images/slides/thumbs/shelter.jpg",
+    img: "./images/slides/shelter.jpg",
     content: "这是一大段中文，发现中文竟然可以自动换行这是一大段中文，发现中文竟然可以自动换行这是一大段中文，发现中文竟然可以自动换行这是一大段中文，发现中文竟然可以自动换行"
   }];
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(rc_camera__WEBPACK_IMPORTED_MODULE_2__["default"], {
