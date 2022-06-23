@@ -155,6 +155,17 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./assets/images/slides/bridge.jpg":
+/*!*****************************************!*\
+  !*** ./assets/images/slides/bridge.jpg ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "c3e23ff0e61c307dee536b1896b576ce.jpg";
+
+/***/ }),
+
 /***/ "./examples/default.js":
 /*!*****************************!*\
   !*** ./examples/default.js ***!
@@ -171,6 +182,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var rc_camera__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rc-camera */ "./index.js");
 /* harmony import */ var rc_camera_assets_index_less__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rc-camera/assets/index.less */ "./assets/index.less");
 /* harmony import */ var rc_camera_assets_index_less__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(rc_camera_assets_index_less__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _assets_images_slides_bridge_jpg__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../assets/images/slides/bridge.jpg */ "./assets/images/slides/bridge.jpg");
+/* harmony import */ var _assets_images_slides_bridge_jpg__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_assets_images_slides_bridge_jpg__WEBPACK_IMPORTED_MODULE_4__);
+
 
 
 
@@ -187,7 +201,7 @@ function contentBar(content) {
 function App() {
   var imgList = [{
     thumb: "../assets/images/slides/thumbs/bridge.jpg",
-    img: "../assets/images/slides/bridge.jpg",
+    img: _assets_images_slides_bridge_jpg__WEBPACK_IMPORTED_MODULE_4___default.a,
     content: "这是一大段中文，发现中文竟然可以自动换行这是一大段中文，发现中文竟然可以自动换行这是一大段中文，发现中文竟然可以自动换行这是一大段中文，发现中文竟然可以自动换行"
   }, {
     thumb: "../assets/images/slides/thumbs/sea.jpg",
