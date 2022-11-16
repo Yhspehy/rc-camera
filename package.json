@@ -10,11 +10,14 @@
   ],
   "homepage": "https://github.com/Yhspehy/rc-camera",
   "repository": {
-    "type": "git",
-    "url": "git@github.com:Yhspehy/rc-camera.git"
+    "type": "url",
+    "url": "https://github.com/Yhspehy/rc-camera.git"
   },
   "bugs": {
     "url": "https://github.com/Yhspehy/rc-camera/issues"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   },
   "files": [
     "es",
