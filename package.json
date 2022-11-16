@@ -1,5 +1,5 @@
 {
-  "name": "rc-camera",
+  "name": "@yhspehy/rc-camera",
   "version": "1.0.3",
   "description": "Img Slide for react",
   "keywords": [
@@ -9,10 +9,7 @@
     "img Slide"
   ],
   "homepage": "https://github.com/Yhspehy/rc-camera",
-  "repository": {
-    "type": "url",
-    "url": "https://github.com/Yhspehy/rc-camera.git"
-  },
+  "repository": "https://github.com/Yhspehy/rc-camera.git",
   "bugs": {
     "url": "https://github.com/Yhspehy/rc-camera/issues"
   },
